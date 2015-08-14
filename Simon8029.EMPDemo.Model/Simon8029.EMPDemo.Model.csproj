@@ -30,8 +30,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +47,69 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EMPDemoModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMPDemoModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMPDemoModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMPDemoModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EMPDemoModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EM_CampaignInstances.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_Campaigns.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_EmailInstances.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_EmailTemplates.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_EmailTemplateTypes.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_Events.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EM_Leads.cs">
+      <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="EMPDemoModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EMPDemoModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="EMPDemoModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMPDemoModel.edmx</DependentUpon>
+      <LastGenOutput>EMPDemoModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EMPDemoModel.edmx.diagram">
+      <DependentUpon>EMPDemoModel.edmx</DependentUpon>
+    </None>
+    <None Include="EMPDemoModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EMPDemoModel.edmx</DependentUpon>
+      <LastGenOutput>EMPDemoModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

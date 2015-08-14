@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="411ef345332340afaf7f8be4d75d581a" Name="Diagram1">
+        <EntityTypeShape EntityType="EPMDemoModel.EM_CampaignInstances" Width="2" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_Campaigns" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailInstances" Width="1.875" PointX="2.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailTemplates" Width="2" PointX="8.375" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailTemplateTypes" Width="2.375" PointX="8.125" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_Events" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPMDemoModel.EM_Leads" Width="1.5" PointX="5.625" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="EPMDemoModel.EM_EmailInstances_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="EPMDemoModel.EM_Events_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="EPMDemoModel.EM_Leads_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="EPMDemoModel.EM_Campaigns_EM_EmailInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="EPMDemoModel.EM_EmailTemplateTypes_EM_EmailTemplates_FK1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
