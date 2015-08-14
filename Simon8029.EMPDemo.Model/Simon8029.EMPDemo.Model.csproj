@@ -83,6 +83,7 @@
     <Compile Include="EM_Leads.cs">
       <DependentUpon>EMPDemoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelsForEasyUI\EasyUIModel_PageData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

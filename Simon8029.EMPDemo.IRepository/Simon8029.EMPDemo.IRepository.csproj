@@ -39,7 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBaseRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Model\Simon8029.EMPDemo.Model.csproj">
+      <Project>{9fa88752-2de5-483b-9875-85fdf1d7e1a3}</Project>
+      <Name>Simon8029.EMPDemo.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
