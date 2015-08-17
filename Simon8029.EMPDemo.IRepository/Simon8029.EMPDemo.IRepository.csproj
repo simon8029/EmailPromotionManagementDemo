@@ -40,6 +40,38 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseRepository.cs" />
+    <Compile Include="IDbSession.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IDbSession.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDbSessionExtension.cs" />
+    <Compile Include="IEM_CampaignInstancesRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_CampaignsRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailInstancesRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailTemplatesRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailTemplateTypesRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EventsRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_LeadsRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRepositories.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +79,19 @@
       <Project>{9fa88752-2de5-483b-9875-85fdf1d7e1a3}</Project>
       <Name>Simon8029.EMPDemo.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IDbSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDbSession.cs</LastGenOutput>
+    </None>
+    <None Include="IRepositories.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IRepositories.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

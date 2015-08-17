@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.Utilities
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.WebApp", "Simon8029.EMPDemo.WebApp\Simon8029.EMPDemo.WebApp.csproj", "{1A4FD325-1FB5-4DF1-846D-CFDAC6AA62C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.RepositoryTests", "Simon8029.EMPDemo.RepositoryTests\Simon8029.EMPDemo.RepositoryTests.csproj", "{71B6D843-6628-436F-9325-D535F7B8A818}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{1A4FD325-1FB5-4DF1-846D-CFDAC6AA62C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A4FD325-1FB5-4DF1-846D-CFDAC6AA62C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A4FD325-1FB5-4DF1-846D-CFDAC6AA62C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B6D843-6628-436F-9325-D535F7B8A818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B6D843-6628-436F-9325-D535F7B8A818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B6D843-6628-436F-9325-D535F7B8A818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B6D843-6628-436F-9325-D535F7B8A818}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
