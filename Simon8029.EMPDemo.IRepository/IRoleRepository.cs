@@ -13,7 +13,7 @@
 
 namespace Simon8029.EMPDemo.IRepository
 {
-    public partial interface IEM_CampaignInstancesRepository : IBaseRepository<Model.EM_CampaignInstances>
+    public partial interface IRoleRepository : IBaseRepository<Model.Role>
     {
     }
 }

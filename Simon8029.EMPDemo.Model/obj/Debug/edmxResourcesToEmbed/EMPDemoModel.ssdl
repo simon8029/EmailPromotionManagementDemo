@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EPMDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EM_CampaignInstances">
+    <Key>
+      <PropertyRef Name="CampaignInstanceID" />
+    </Key>
+    <Property Name="CampaignInstanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailInstanceID" Type="int" />
+    <Property Name="LeadID" Type="int" />
+    <Property Name="IsSent" Type="bit" />
+    <Property Name="EventID" Type="int" />
+    <Property Name="EventStatus" Type="char" MaxLength="1" />
+    <Property Name="EventDate" Type="datetime" />
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EM_Campaigns">
+    <Key>
+      <PropertyRef Name="CampaignID" />
+    </Key>
+    <Property Name="CampaignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" />
+    <Property Name="EndDate" Type="datetime" />
+    <Property Name="CampaignName" Type="nvarchar" MaxLength="200" />
+    <Property Name="CampaignDesc" Type="varchar(max)" />
+    <Property Name="Owner" Type="nvarchar" MaxLength="100" />
+    <Property Name="ApprovalRequest" Type="bit" />
+    <Property Name="Approved" Type="bit" />
+    <Property Name="ApprovedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Submitted" Type="bit" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EM_EmailInstances">
+    <Key>
+      <PropertyRef Name="EmailInstanceID" />
+    </Key>
+    <Property Name="EmailInstanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CampaignID" Type="int" />
+    <Property Name="SubjectLine" Type="varchar" MaxLength="250" />
+    <Property Name="EmailBody" Type="nvarchar(max)" />
+    <Property Name="Step" Type="tinyint" />
+    <Property Name="PreviousStep" Type="tinyint" />
+    <Property Name="EnableTracking" Type="bit" />
+    <Property Name="IsDraft" Type="bit" />
+    <Property Name="Timespan" Type="int" />
+    <Property Name="AbsoluteDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EM_EmailTemplates">
+    <Key>
+      <PropertyRef Name="EmailTemplateID" />
+    </Key>
+    <Property Name="EmailTemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmailTemplateTypeID" Type="smallint" />
+    <Property Name="TemplateTypeID" Type="smallint" />
+    <Property Name="Template" Type="nvarchar(max)" />
+    <Property Name="Enabled" Type="bit" />
+    <Property Name="ExpireDate" Type="datetime" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="UpdatedDate" Type="datetime" />
+    <Property Name="Updatedby" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EM_EmailTemplateTypes">
+    <Key>
+      <PropertyRef Name="EmailTemplateTypeID" />
+    </Key>
+    <Property Name="EmailTemplateTypeID" Type="smallint" Nullable="false" />
+    <Property Name="EmailTemplateType" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="EM_Events">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="int" Nullable="false" />
+    <Property Name="EventName" Type="varchar" MaxLength="200" />
+    <Property Name="EventDesc" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="EM_Leads">
+    <Key>
+      <PropertyRef Name="LeadID" />
+    </Key>
+    <Property Name="LeadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+    <Property Name="IsValid" Type="bit" />
+    <Property Name="Unsubscribed" Type="bit" />
+  </EntityType>
+  <Association Name="EM_Campaigns_EM_EmailInstances_FK1">
+    <End Role="EM_Campaigns" Type="Self.EM_Campaigns" Multiplicity="0..1" />
+    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_Campaigns">
+        <PropertyRef Name="CampaignID" />
+      </Principal>
+      <Dependent Role="EM_EmailInstances">
+        <PropertyRef Name="CampaignID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EM_EmailInstances_EM_CampaignInstances_FK1">
+    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="0..1" />
+    <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_EmailInstances">
+        <PropertyRef Name="EmailInstanceID" />
+      </Principal>
+      <Dependent Role="EM_CampaignInstances">
+        <PropertyRef Name="EmailInstanceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EM_EmailTemplateTypes_EM_EmailTemplates_FK1">
+    <End Role="EM_EmailTemplateTypes" Type="Self.EM_EmailTemplateTypes" Multiplicity="0..1" />
+    <End Role="EM_EmailTemplates" Type="Self.EM_EmailTemplates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_EmailTemplateTypes">
+        <PropertyRef Name="EmailTemplateTypeID" />
+      </Principal>
+      <Dependent Role="EM_EmailTemplates">
+        <PropertyRef Name="EmailTemplateTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EM_Events_EM_CampaignInstances_FK1">
+    <End Role="EM_Events" Type="Self.EM_Events" Multiplicity="0..1" />
+    <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_Events">
+        <PropertyRef Name="EventID" />
+      </Principal>
+      <Dependent Role="EM_CampaignInstances">
+        <PropertyRef Name="EventID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EM_Leads_EM_CampaignInstances_FK1">
+    <End Role="EM_Leads" Type="Self.EM_Leads" Multiplicity="0..1" />
+    <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_Leads">
+        <PropertyRef Name="LeadID" />
+      </Principal>
+      <Dependent Role="EM_CampaignInstances">
+        <PropertyRef Name="LeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EPMDemoModelStoreContainer">
+    <EntitySet Name="EM_CampaignInstances" EntityType="Self.EM_CampaignInstances" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_Campaigns" EntityType="Self.EM_Campaigns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_EmailInstances" EntityType="Self.EM_EmailInstances" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_EmailTemplates" EntityType="Self.EM_EmailTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_EmailTemplateTypes" EntityType="Self.EM_EmailTemplateTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_Events" EntityType="Self.EM_Events" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EM_Leads" EntityType="Self.EM_Leads" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="EM_Campaigns_EM_EmailInstances_FK1" Association="Self.EM_Campaigns_EM_EmailInstances_FK1">
+      <End Role="EM_Campaigns" EntitySet="EM_Campaigns" />
+      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EM_EmailInstances_EM_CampaignInstances_FK1" Association="Self.EM_EmailInstances_EM_CampaignInstances_FK1">
+      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
+      <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EM_EmailTemplateTypes_EM_EmailTemplates_FK1" Association="Self.EM_EmailTemplateTypes_EM_EmailTemplates_FK1">
+      <End Role="EM_EmailTemplateTypes" EntitySet="EM_EmailTemplateTypes" />
+      <End Role="EM_EmailTemplates" EntitySet="EM_EmailTemplates" />
+    </AssociationSet>
+    <AssociationSet Name="EM_Events_EM_CampaignInstances_FK1" Association="Self.EM_Events_EM_CampaignInstances_FK1">
+      <End Role="EM_Events" EntitySet="EM_Events" />
+      <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
+    </AssociationSet>
+    <AssociationSet Name="EM_Leads_EM_CampaignInstances_FK1" Association="Self.EM_Leads_EM_CampaignInstances_FK1">
+      <End Role="EM_Leads" EntitySet="EM_Leads" />
+      <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

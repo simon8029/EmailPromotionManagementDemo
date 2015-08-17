@@ -53,6 +53,15 @@
       <DependentUpon>DbSession.tt</DependentUpon>
     </Compile>
     <Compile Include="DbSessionExtension.cs" />
+    <Compile Include="DepartmentRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="employeeRoleRelationshipRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
     <Compile Include="EM_CampaignInstancesRepository.cs">
       <DependentUpon>Repositories.tt</DependentUpon>
     </Compile>
@@ -74,11 +83,22 @@
     <Compile Include="EM_LeadsRepository.cs">
       <DependentUpon>Repositories.tt</DependentUpon>
     </Compile>
-    <Compile Include="LeadsRepository.cs" />
+    <Compile Include="PermissionRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RolePermissionRelationshipRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoleRepository.cs">
+      <DependentUpon>Repositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VipPermissionRepository.cs">
       <DependentUpon>Repositories.tt</DependentUpon>
     </Compile>
   </ItemGroup>

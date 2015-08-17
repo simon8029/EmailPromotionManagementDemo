@@ -12,16 +12,13 @@ namespace Simon8029.EMPDemo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class EM_EmailTemplateTypes
+    public partial class VipPermission
     {
-        public EM_EmailTemplateTypes()
-        {
-            this.EM_EmailTemplates = new HashSet<EM_EmailTemplates>();
-        } 
+        public int vipPermissionID { get; set; }
+        public int userID { get; set; }
+        public int permissionID { get; set; }
     
-        public short EmailTemplateTypeID { get; set; }
-        public string EmailTemplateType { get; set; }
-    
-        public virtual ICollection<EM_EmailTemplates> EM_EmailTemplates { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Permission Permission { get; set; }
     }
 }

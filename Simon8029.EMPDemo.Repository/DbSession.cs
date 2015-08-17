@@ -90,5 +90,82 @@ namespace Simon8029.EMPDemo.Repository
         	}
         }
     
+    	IRepository.IDepartmentRepository _DepartmentRepository;
+        public IRepository.IDepartmentRepository DepartmentRepository 
+        { 
+        	get
+        	{
+                if (_DepartmentRepository == null)
+                    _DepartmentRepository = new DepartmentRepository();
+                return _DepartmentRepository;
+        	}
+        }
+    
+    	IRepository.IEmployeeRepository _EmployeeRepository;
+        public IRepository.IEmployeeRepository EmployeeRepository 
+        { 
+        	get
+        	{
+                if (_EmployeeRepository == null)
+                    _EmployeeRepository = new EmployeeRepository();
+                return _EmployeeRepository;
+        	}
+        }
+    
+    	IRepository.IemployeeRoleRelationshipRepository _employeeRoleRelationshipRepository;
+        public IRepository.IemployeeRoleRelationshipRepository employeeRoleRelationshipRepository 
+        { 
+        	get
+        	{
+                if (_employeeRoleRelationshipRepository == null)
+                    _employeeRoleRelationshipRepository = new employeeRoleRelationshipRepository();
+                return _employeeRoleRelationshipRepository;
+        	}
+        }
+    
+    	IRepository.IPermissionRepository _PermissionRepository;
+        public IRepository.IPermissionRepository PermissionRepository 
+        { 
+        	get
+        	{
+                if (_PermissionRepository == null)
+                    _PermissionRepository = new PermissionRepository();
+                return _PermissionRepository;
+        	}
+        }
+    
+    	IRepository.IRoleRepository _RoleRepository;
+        public IRepository.IRoleRepository RoleRepository 
+        { 
+        	get
+        	{
+                if (_RoleRepository == null)
+                    _RoleRepository = new RoleRepository();
+                return _RoleRepository;
+        	}
+        }
+    
+    	IRepository.IRolePermissionRelationshipRepository _RolePermissionRelationshipRepository;
+        public IRepository.IRolePermissionRelationshipRepository RolePermissionRelationshipRepository 
+        { 
+        	get
+        	{
+                if (_RolePermissionRelationshipRepository == null)
+                    _RolePermissionRelationshipRepository = new RolePermissionRelationshipRepository();
+                return _RolePermissionRelationshipRepository;
+        	}
+        }
+    
+    	IRepository.IVipPermissionRepository _VipPermissionRepository;
+        public IRepository.IVipPermissionRepository VipPermissionRepository 
+        { 
+        	get
+        	{
+                if (_VipPermissionRepository == null)
+                    _VipPermissionRepository = new VipPermissionRepository();
+                return _VipPermissionRepository;
+        	}
+        }
+    
     }
 }

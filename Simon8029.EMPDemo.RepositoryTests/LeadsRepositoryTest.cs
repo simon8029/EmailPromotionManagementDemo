@@ -22,7 +22,7 @@ namespace Simon8029.EMPDemo.RepositoryTests
             entity = new EM_Leads();
             entity.FirstName = "abc";
             entity.LastName = "def";
-            entity.EmailAddress = "abc2@def.com";
+            entity.EmailAddress = "abc3@def.com";
             entity.IsValid = null;
             entity.Unsubscribed = null;
             target.Add(entity);

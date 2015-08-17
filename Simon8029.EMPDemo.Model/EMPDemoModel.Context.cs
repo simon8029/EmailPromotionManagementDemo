@@ -32,5 +32,12 @@ namespace Simon8029.EMPDemo.Model
         public DbSet<EM_EmailTemplateTypes> EM_EmailTemplateTypes { get; set; }
         public DbSet<EM_Events> EM_Events { get; set; }
         public DbSet<EM_Leads> EM_Leads { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<employeeRoleRelationship> employeeRoleRelationship { get; set; }
+        public DbSet<Permission> Permission { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<RolePermissionRelationship> RolePermissionRelationship { get; set; }
+        public DbSet<VipPermission> VipPermission { get; set; }
     }
 }

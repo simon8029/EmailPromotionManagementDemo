@@ -46,6 +46,15 @@
       <DependentUpon>IDbSession.tt</DependentUpon>
     </Compile>
     <Compile Include="IDbSessionExtension.cs" />
+    <Compile Include="IDepartmentRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEmployeeRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IemployeeRoleRelationshipRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
     <Compile Include="IEM_CampaignInstancesRepository.cs">
       <DependentUpon>IRepositories.tt</DependentUpon>
     </Compile>
@@ -67,9 +76,21 @@
     <Compile Include="IEM_LeadsRepository.cs">
       <DependentUpon>IRepositories.tt</DependentUpon>
     </Compile>
+    <Compile Include="IPermissionRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
     <Compile Include="IRepositories.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRolePermissionRelationshipRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRoleRepository.cs">
+      <DependentUpon>IRepositories.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IVipPermissionRepository.cs">
       <DependentUpon>IRepositories.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

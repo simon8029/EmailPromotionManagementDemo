@@ -12,16 +12,13 @@ namespace Simon8029.EMPDemo.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class EM_EmailTemplateTypes
+    public partial class employeeRoleRelationship
     {
-        public EM_EmailTemplateTypes()
-        {
-            this.EM_EmailTemplates = new HashSet<EM_EmailTemplates>();
-        } 
+        public int employeeRoleRelationID { get; set; }
+        public int employeeID { get; set; }
+        public int RoleID { get; set; }
     
-        public short EmailTemplateTypeID { get; set; }
-        public string EmailTemplateType { get; set; }
-    
-        public virtual ICollection<EM_EmailTemplates> EM_EmailTemplates { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Role Role { get; set; }
     }
 }

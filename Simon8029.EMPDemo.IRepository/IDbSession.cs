@@ -47,5 +47,40 @@ namespace Simon8029.EMPDemo.IRepository
     		get;
     	}
     
+        IDepartmentRepository DepartmentRepository
+    	{ 
+    		get;
+    	}
+    
+        IEmployeeRepository EmployeeRepository
+    	{ 
+    		get;
+    	}
+    
+        IemployeeRoleRelationshipRepository employeeRoleRelationshipRepository
+    	{ 
+    		get;
+    	}
+    
+        IPermissionRepository PermissionRepository
+    	{ 
+    		get;
+    	}
+    
+        IRoleRepository RoleRepository
+    	{ 
+    		get;
+    	}
+    
+        IRolePermissionRelationshipRepository RolePermissionRelationshipRepository
+    	{ 
+    		get;
+    	}
+    
+        IVipPermissionRepository VipPermissionRepository
+    	{ 
+    		get;
+    	}
+    
     }
 }

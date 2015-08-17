@@ -17,6 +17,20 @@
         <AssociationConnector Association="EPMDemoModel.EM_Leads_EM_CampaignInstances_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="EPMDemoModel.EM_Campaigns_EM_EmailInstances_FK1" ManuallyRouted="false" />
         <AssociationConnector Association="EPMDemoModel.EM_EmailTemplateTypes_EM_EmailTemplates_FK1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EPMDemoModel.Department" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="EPMDemoModel.Employee" Width="1.5" PointX="2.75" PointY="6.75" />
+        <AssociationConnector Association="EPMDemoModel.FK_Employee_Department" />
+        <EntityTypeShape EntityType="EPMDemoModel.employeeRoleRelationship" Width="1.5" PointX="10.625" PointY="11.625" />
+        <EntityTypeShape EntityType="EPMDemoModel.Permission" Width="1.5" PointX="5.375" PointY="10.125" />
+        <EntityTypeShape EntityType="EPMDemoModel.Role" Width="1.5" PointX="5.375" PointY="16.25" />
+        <EntityTypeShape EntityType="EPMDemoModel.RolePermissionRelationship" Width="1.5" PointX="7.625" PointY="12.375" />
+        <EntityTypeShape EntityType="EPMDemoModel.VipPermission" Width="1.5" PointX="7.625" PointY="9.75" />
+        <AssociationConnector Association="EPMDemoModel.FK_employeeRoleRelationship_Employee" />
+        <AssociationConnector Association="EPMDemoModel.FK_VipPermission_Employee" />
+        <AssociationConnector Association="EPMDemoModel.FK_employeeRoleRelationship_Role" />
+        <AssociationConnector Association="EPMDemoModel.FK_RolePermissionRelationship_Permission" />
+        <AssociationConnector Association="EPMDemoModel.FK_VipPermission_Permission" />
+        <AssociationConnector Association="EPMDemoModel.FK_RolePermissionRelationship_Role" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

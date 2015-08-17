@@ -11,9 +11,12 @@
 // of the BSD license.  See the LICENSE file for details.
 // **********************************************************************
 
-namespace Simon8029.EMPDemo.IRepository
-{
-    public partial interface IEM_CampaignInstancesRepository : IBaseRepository<Model.EM_CampaignInstances>
+using Simon8029.EMPDemo.Model;
+using Simon8029.EMPDemo.IRepository;
+  
+namespace Simon8029.EMPDemo.Repository{
+    public partial class RolePermissionRelationshipRepository : BaseRepository<RolePermissionRelationship>,IRolePermissionRelationshipRepository
     {
+    
     }
 }
