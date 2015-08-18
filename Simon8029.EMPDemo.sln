@@ -16,6 +16,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.Utilities", "Simon8029.EMPDemo.Utilities\Simon8029.EMPDemo.Utilities.csproj", "{F116B6D4-3FF0-499E-A88A-C6ED8CF2E0A0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.WebApp", "Simon8029.EMPDemo.WebApp\Simon8029.EMPDemo.WebApp.csproj", "{1A4FD325-1FB5-4DF1-846D-CFDAC6AA62C1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0C785B54-CDEF-414C-9546-6805E61DEDE1} = {0C785B54-CDEF-414C-9546-6805E61DEDE1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simon8029.EMPDemo.RepositoryTests", "Simon8029.EMPDemo.RepositoryTests\Simon8029.EMPDemo.RepositoryTests.csproj", "{71B6D843-6628-436F-9325-D535F7B8A818}"
 EndProject

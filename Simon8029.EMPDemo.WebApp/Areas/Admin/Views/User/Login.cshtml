@@ -1,0 +1,121 @@
+﻿
+@{
+    Layout = null;
+}
+@model Simon8029.EMPDemo.WebApp.Areas.Admin.Models.ViewModels.LoginWindowViewModel
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Login</title>
+    <link href="~/Content/easyUIThemes/icon.css" rel="stylesheet" />   
+    <link href="~/Content/easyUIThemes/bootstrap/easyui.css" rel="stylesheet" />   
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <style type="text/css">
+        #tbList {
+            border: 0px #000 solid;
+            width: 97%;
+            margin: 5px auto;
+            border-collapse: collapse;
+        }
+
+            #tbList td {
+                border: 0px #000 solid;
+                padding: 5px 10px;
+            }
+
+            
+
+        .validation-summary-errors ul {
+            list-style-type: none;
+            padding: 0px;
+            text-align: left;
+            width: 200px;
+            margin: 0px auto;
+            color: red;
+        }
+
+            .validation-summary-errors ul li {
+            }
+    </style>
+
+    <script type="text/javascript">
+        $(function() {
+            $("#loginWindow").window({
+                title: 'Login Window',
+                iconCls: 'icon-tip',
+                closable: false,
+                maximizable: false,
+                minimizable: false,
+                resizable: false,
+                width: 400,
+                height: 200
+            });
+
+            $("#imgVCode").click(function () {
+                this.src = "/VCode.ashx?r=" + Math.random();
+            })
+        })
+
+        function begin() {
+            alert("fsdfsdf");
+
+            $.messager.progress();
+        }
+
+        function complete() {
+            alert("234234");
+        }
+    </script>
+</head>
+<body style="height:100%;width:100%;overflow:hidden;border:none;padding:20px">
+
+
+<div id="loginWindow">
+    @using (Ajax.BeginForm(new AjaxOptions() { HttpMethod = "post", OnBegin = "begin", OnComplete = "complete" }))
+    {
+        <table id="tbList">
+            <tr>
+                <td style="width: 150px; text-align: right">@Html.DisplayNameFor(o => o.LoginName)</td>
+                <td colspan="2">
+                    @Html.TextBoxFor(o => o.LoginName, new {Value = "admin"})
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px; text-align: right">@Html.DisplayNameFor(o => o.LoginPassword)</td>
+                <td colspan="2">
+                    @Html.PasswordFor(o => o.LoginPassword, new {value = "123123"})
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 150px; text-align: right">@Html.DisplayNameFor(o => o.LoginValidateCode)</td>
+                <td>
+                   @* @Html.TextBoxFor(o => o.LoginValidateCode)*@
+                </td>
+                <td style="width: 120px; padding-left: 0px;">
+                    @*<img id="imgVCode" src="/VCode.ashx" style="cursor: pointer;"/>*@
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center;">
+                    <input type="submit" value="Login"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center;">
+                    @Html.ValidationSummary()
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+</body>
+</html>
