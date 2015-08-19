@@ -21,6 +21,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(LoginWindowViewModel loginUserInfo)
         {
+            var str = "123123".ToMD5();
             if (ModelState.IsValid)
             {
                 if (Session[VCode.vCodeName] != null &&
@@ -36,7 +37,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
                             "", null);
                     }
 
-                    if (loginUserInfo.LoginPassword.ToMD5().IsSame(userInfoInDatabase.employeeLoginPassword))
+                    if (loginUserInfo.LoginPassword.IsSame(userInfoInDatabase.employeeLoginPassword))
                     {
                         OperationContext.CurrentUser = userInfoInDatabase.ToPOCO();
 

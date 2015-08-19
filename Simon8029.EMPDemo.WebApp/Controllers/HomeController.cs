@@ -10,7 +10,7 @@ namespace Simon8029.EMPDemo.WebApp.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+           return Redirect("/admin");
         }
 
         public ActionResult About()

@@ -59,19 +59,17 @@
                 height: 200
             });
 
-            $("#imgVCode").click(function () {
+            $("#imgVCode").click(function() {
                 this.src = "/VCode.ashx?r=" + Math.random();
-            })
-        })
+            });
+        });
 
         function begin() {
-            alert("fsdfsdf");
-
-            $.messager.progress();
+            //$.messager.progress();
         }
 
-        function complete() {
-            alert("234234");
+        function complete(ajaxMessage) {
+            
         }
     </script>
 </head>
@@ -97,10 +95,10 @@
             <tr>
                 <td style="width: 150px; text-align: right">@Html.DisplayNameFor(o => o.LoginValidateCode)</td>
                 <td>
-                   @* @Html.TextBoxFor(o => o.LoginValidateCode)*@
+                    @Html.TextBoxFor(o => o.LoginValidateCode)
                 </td>
                 <td style="width: 120px; padding-left: 0px;">
-                    @*<img id="imgVCode" src="/VCode.ashx" style="cursor: pointer;"/>*@
+                    <img id="imgVCode" src="/VCode.ashx" style="cursor: pointer;"/>
                 </td>
             </tr>
             <tr>

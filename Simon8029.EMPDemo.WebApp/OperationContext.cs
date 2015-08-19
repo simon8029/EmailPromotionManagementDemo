@@ -4,6 +4,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using Simon8029.EMPDemo.IService;
 using Simon8029.EMPDemo.Model.ModelsForEasyUI;
 using Simon8029.EMPDemo.Utilities;
 
@@ -24,7 +25,7 @@ namespace Simon8029.EMPDemo.WebApp
                 if (_serviceSession == null)
                 {
                     //2.实例化 业务仓储 对象
-                    _serviceSession = Utilities.DI.GetObject<IService.IServiceSession>("ServiceSession");
+                    _serviceSession = Utilities.DI.GetObject<IServiceSession>("ServiceSession");
                 }
                 //3.返回业务仓储对象
                 return _serviceSession;

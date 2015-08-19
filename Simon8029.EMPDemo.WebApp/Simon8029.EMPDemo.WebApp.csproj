@@ -399,7 +399,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -431,6 +433,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Simon8029.EMPDemo.IRepository\Simon8029.EMPDemo.IRepository.csproj">
+      <Project>{2a000881-3065-4178-83e4-c30c34f50711}</Project>
+      <Name>Simon8029.EMPDemo.IRepository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Simon8029.EMPDemo.IService\Simon8029.EMPDemo.IService.csproj">
       <Project>{0c785b54-cdef-414c-9546-6805e61dede1}</Project>
       <Name>Simon8029.EMPDemo.IService</Name>
@@ -438,6 +444,14 @@
     <ProjectReference Include="..\Simon8029.EMPDemo.Model\Simon8029.EMPDemo.Model.csproj">
       <Project>{9fa88752-2de5-483b-9875-85fdf1d7e1a3}</Project>
       <Name>Simon8029.EMPDemo.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Repository\Simon8029.EMPDemo.Repository.csproj">
+      <Project>{109c7485-9bd2-4249-91a3-513725022669}</Project>
+      <Name>Simon8029.EMPDemo.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Service\Simon8029.EMPDemo.Service.csproj">
+      <Project>{e0e5e787-5718-46eb-9c91-94506fe67025}</Project>
+      <Name>Simon8029.EMPDemo.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\Simon8029.EMPDemo.Utilities\Simon8029.EMPDemo.Utilities.csproj">
       <Project>{f116b6d4-3ff0-499e-a88a-c6ed8cf2e0a0}</Project>

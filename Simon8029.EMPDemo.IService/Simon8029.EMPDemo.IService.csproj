@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0C785B54-CDEF-414C-9546-6805E61DEDE1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Simon8029.EMPDemo.IService</RootNamespace>
+    <AssemblyName>Simon8029.EMPDemo.IService</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IBaseService.cs" />
+    <Compile Include="IDepartmentService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IemployeeRoleRelationshipService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEmployeeService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_CampaignInstancesService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_CampaignsService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailInstancesService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailTemplatesService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EmailTemplateTypesService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_EventsService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IEM_LeadsService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IPermissionService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRolePermissionRelationshipService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IRoleService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IServiceSessionExtension.cs" />
+    <Compile Include="IServices.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IServiceSession.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IServiceSession.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IVipPermissionService.cs">
+      <DependentUpon>IServices.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="IServices.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IServices.cs</LastGenOutput>
+    </None>
+    <None Include="IServiceSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IServiceSession.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Model\Simon8029.EMPDemo.Model.csproj">
+      <Project>{9fa88752-2de5-483b-9875-85fdf1d7e1a3}</Project>
+      <Name>Simon8029.EMPDemo.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
