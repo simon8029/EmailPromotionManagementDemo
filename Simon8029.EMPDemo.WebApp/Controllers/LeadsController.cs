@@ -6,12 +6,8 @@ using System.Web.Mvc;
 
 namespace Simon8029.EMPDemo.WebApp.Controllers
 {
-    public class LeadsController : Controller
+    public class LeadsController : BaseController
     {
-        // GET: Leads
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

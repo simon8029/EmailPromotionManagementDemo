@@ -114,6 +114,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\ViewModels\LoginWindowViewModel.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeadsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -419,6 +420,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Leads\" />
   </ItemGroup>
   <ItemGroup>
@@ -432,6 +434,14 @@
     <ProjectReference Include="..\Simon8029.EMPDemo.IService\Simon8029.EMPDemo.IService.csproj">
       <Project>{0c785b54-cdef-414c-9546-6805e61dede1}</Project>
       <Name>Simon8029.EMPDemo.IService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Model\Simon8029.EMPDemo.Model.csproj">
+      <Project>{9fa88752-2de5-483b-9875-85fdf1d7e1a3}</Project>
+      <Name>Simon8029.EMPDemo.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Simon8029.EMPDemo.Utilities\Simon8029.EMPDemo.Utilities.csproj">
+      <Project>{f116b6d4-3ff0-499e-a88a-c6ed8cf2e0a0}</Project>
+      <Name>Simon8029.EMPDemo.Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

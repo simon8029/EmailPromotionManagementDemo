@@ -92,9 +92,57 @@
     <Compile Include="EM_Leads.cs">
       <DependentUpon>EMPDemoModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModelsForEasyUI\EasyUIModel_AjaxMessage.cs" />
     <Compile Include="ModelsForEasyUI\EasyUIModel_PageData.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>EMPDemoModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\Department.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\Employee.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\employeeRoleRelationship.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_CampaignInstances.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_Campaigns.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_EmailInstances.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_EmailTemplates.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_EmailTemplateTypes.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_Events.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\EM_Leads.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\Permission.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\POCO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\Role.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\RolePermissionRelationship.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="POCO\VipPermission.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Role.cs">
@@ -129,6 +177,10 @@
       <LastGenOutput>EMPDemoModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
+    <None Include="POCO\POCO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>POCO.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -15,5 +15,6 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Models.ViewModels
         public string LoginPassword { get; set; }
         [DisplayName("Validate Code:"),Required]
         public string  LoginValidateCode { get; set; }
+        public bool RememberMe { get; set; }
     }
 }
