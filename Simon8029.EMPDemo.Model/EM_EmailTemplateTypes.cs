@@ -17,7 +17,7 @@ namespace Simon8029.EMPDemo.Model
         public EM_EmailTemplateTypes()
         {
             this.EM_EmailTemplates = new HashSet<EM_EmailTemplates>();
-        } 
+        }
     
         public short EmailTemplateTypeID { get; set; }
         public string EmailTemplateType { get; set; }

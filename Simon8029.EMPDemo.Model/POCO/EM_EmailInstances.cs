@@ -13,20 +13,20 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_EmailInstances ToPOCO(){
 			return new EM_EmailInstances(){
-			EmailInstanceID=this.EmailInstanceID,
-			CampaignID=this.CampaignID,
-			SubjectLine=this.SubjectLine,
-			EmailBody=this.EmailBody,
-			Step=this.Step,
-			PreviousStep=this.PreviousStep,
-			EnableTracking=this.EnableTracking,
-			IsDraft=this.IsDraft,
-			Timespan=this.Timespan,
-			AbsoluteDate=this.AbsoluteDate,
-			CreatedDate=this.CreatedDate,
-			CreatedBy=this.CreatedBy,
-			UpdatedDate=this.UpdatedDate,
-			UpdatedBy=this.UpdatedBy,
+								EmailInstanceID=this.EmailInstanceID,
+				CampaignID=this.CampaignID,
+				SubjectLine=this.SubjectLine,
+				EmailBody=this.EmailBody,
+				Step=this.Step,
+				PreviousStep=this.PreviousStep,
+				EnableTracking=this.EnableTracking,
+				IsDraft=this.IsDraft,
+				Timespan=this.Timespan,
+				AbsoluteDate=this.AbsoluteDate,
+				CreatedDate=this.CreatedDate,
+				CreatedBy=this.CreatedBy,
+				UpdatedDate=this.UpdatedDate,
+				UpdatedBy=this.UpdatedBy,
 			};
 		}
 	}

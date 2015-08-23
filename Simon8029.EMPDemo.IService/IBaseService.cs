@@ -17,6 +17,12 @@ namespace Simon8029.EMPDemo.IService
         /// <returns>查询结果</returns>
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression);
 
+        IQueryable<TEntity> Get<TKey>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> orderBy, bool isAsc = true);
+
+        EasyUIModel_PageData<TEntity> GetWithPagination<TKey>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression,
+            bool isAsc = true);
+
         /// <summary>
         /// 修改指定实体的指定属性
         /// </summary>
@@ -50,9 +56,7 @@ namespace Simon8029.EMPDemo.IService
         /// <param name="whereExpression">删除实体的查询条件</param>
         void Delete(Expression<Func<TEntity, bool>> whereExpression);
 
-        EasyUIModel_PageData<TEntity> GetWithPagination<TKey>(int pageIndex, int pageSize,
-            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression,
-            bool isAsc = true);
+        
     }
 
 }

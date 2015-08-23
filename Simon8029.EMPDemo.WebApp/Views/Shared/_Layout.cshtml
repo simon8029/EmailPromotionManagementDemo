@@ -3,79 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/easyUIThemes/icon.css" rel="stylesheet" />
+    <link href="~/Content/easyUIThemes/default/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
 </head>
-<body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)*@
-
-    <table style="width: 90%">
-        <tr>
-
-            <td rowspan="2"><p class="site-title">
-    <a href="/Home"><img class="logo" src="~/Images/email-marketing.jpg" /></a>
-</p></td>
-            
-            <td colspan="2"></td>
-            
-        </tr>
-        <tr>
-            <td>
-                <p class="site-title">Email Promotion Management Demo</p>
-            </td>
-            <td>
-                <section id="login">
-                    Hello, <span class="username">@User.Identity</span>!
-                </section>
-            </td>
-        </tr>
-        <tr class="layout-main-content">
-            <td class="layout-nav"></td>
-            <td style="vertical-align: top" colspan="2">
-                @RenderSection("featured",required:false)
-                <section class="content-wrapper main-content clear-fix">
-                    @RenderBody()
-                </section>
-            </td>
-        </tr>
-        <tr style="text-align: center">
-            <td colspan="3"> 
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - Email Promotion Management Application <a>Contact Us</a></p>
-                </footer>
-            </td>
-        </tr>
-    </table>
-    @Scripts.Render()
+<body class="easyui-layout">
+    <div data-options="region:'north'" style="height: 150px;">
+        <table style="width:90%">
+            <tr>
+                <td rowspan="2" style="vertical-align:bottom;">
+                    <p>
+                        <a href="/Home">
+                            <img style="width: 100px" src="~/Images/email-marketing.jpg" />
+                        </a>
+                    </p>
+                </td>
+                <td colspan="3"> </td>
+            </tr>
+            <tr>
+                <td>
+                    <p style="font-size: 48px" > Email Marketing </p>
+                </td>
+                <td>
+                    <section id="login">
+                        Hello, <span class="username">@User.Identity.Name</span>!
+                    </section>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div data-options="region:'west',split:true" title=" " style="width:300px;"></div>
+    <div data-options="region:'center'">
+        @RenderBody()
+    </div>
 </body>
 </html>

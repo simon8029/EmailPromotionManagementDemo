@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="EPMDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Simon8029CRMDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Department">
     <Key>
       <PropertyRef Name="departmentID" />
     </Key>
     <Property Name="departmentID" Type="int" Nullable="false" />
-    <Property Name="departmentName" Type="varbinary" MaxLength="50" Nullable="false" />
-    <Property Name="departmentRemark" Type="varbinary" MaxLength="200" />
+    <Property Name="departmentName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="departmentRemark" Type="varchar" MaxLength="200" />
     <Property Name="departmentIsDeleted" Type="bit" Nullable="false" />
     <Property Name="departmentAddTime" Type="datetime" Nullable="false" />
   </EntityType>
@@ -116,7 +116,7 @@
     <Property Name="employeeDepartmentID" Type="int" />
     <Property Name="employeeCnName" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="employeeLoginName" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="employeeLoginPassword" Type="char" MaxLength="30" Nullable="false" />
+    <Property Name="employeeLoginPassword" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="employeeGender" Type="bit" Nullable="false" />
     <Property Name="employeePhone" Type="varchar" MaxLength="50" />
     <Property Name="employeeAddress" Type="varchar" MaxLength="200" />
@@ -138,18 +138,18 @@
     <Property Name="permissionID" Type="int" Nullable="false" />
     <Property Name="permissionParentID" Type="int" Nullable="false" />
     <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="permissionRemark" Type="varbinary" MaxLength="350" />
+    <Property Name="permissionRemark" Type="varchar" MaxLength="150" />
     <Property Name="permissionAreaName" Type="varchar" MaxLength="150" />
     <Property Name="permissionControllerName" Type="varchar" MaxLength="150" />
     <Property Name="permissionActionName" Type="varchar" MaxLength="150" />
     <Property Name="permissionFormMethod" Type="smallint" Nullable="false" />
     <Property Name="permissionOperationType" Type="smallint" Nullable="false" />
-    <Property Name="permissionJSMethodName" Type="varbinary" MaxLength="100" />
+    <Property Name="permissionJSMethodName" Type="varchar" MaxLength="100" />
     <Property Name="permissionIcon" Type="varchar" MaxLength="150" />
     <Property Name="permissionIsLink" Type="bit" Nullable="false" />
     <Property Name="permissionOrder" Type="int" Nullable="false" />
     <Property Name="permissionIsShow" Type="bit" Nullable="false" />
-    <Property Name="permissionIsDeleted" Type="bigint" Nullable="false" />
+    <Property Name="permissionIsDeleted" Type="bit" Nullable="false" />
     <Property Name="permissionAddTime" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Role">
@@ -322,7 +322,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="EPMDemoModelStoreContainer">
+  <Function Name="EM_CampaignInstances_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmailInstanceID" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="Simon8029CRMDemoModelStoreContainer">
     <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EM_CampaignInstances" EntityType="Self.EM_CampaignInstances" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EM_Campaigns" EntityType="Self.EM_Campaigns" Schema="dbo" store:Type="Tables" />

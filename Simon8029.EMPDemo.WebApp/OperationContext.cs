@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
@@ -16,7 +18,7 @@ namespace Simon8029.EMPDemo.WebApp
         public const string UserPerSessionKey = "USER_PER_SESSION_KEY";
         public const string UseridCookieKey = "USERID_COOKIE_KEY";
 
-       IService.IServiceSession _serviceSession;
+        IService.IServiceSession _serviceSession;
         public IService.IServiceSession ServiceSession
         {
             get
@@ -49,7 +51,7 @@ namespace Simon8029.EMPDemo.WebApp
             get
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies[UseridCookieKey];
-                if (cookie!=null &&!string.IsNullOrEmpty(cookie.Value))
+                if (cookie != null && !string.IsNullOrEmpty(cookie.Value))
                 {
                     return cookie.Value.ToEncryptedString().AsInt();
                 }
@@ -58,7 +60,8 @@ namespace Simon8029.EMPDemo.WebApp
 
             set
             {
-                HttpCookie cookie = new HttpCookie(UseridCookieKey,value.ToString().ToEncryptedString());
+                HttpCookie cookie = new HttpCookie(UseridCookieKey, value.ToString().ToEncryptedString());
+                cookie.Expires = DateTime.Now.AddMinutes(30);
                 HttpContext.Current.Response.Cookies.Add(cookie);
             }
         }
@@ -69,22 +72,25 @@ namespace Simon8029.EMPDemo.WebApp
             set { HttpContext.Current.Session[UserPerSessionKey] = value; }
         }
 
-        public bool HasPermission(string AreaName, string ControllerName, string ActionName, int FormMethod)
+        public bool HasPermission(string AreaName, string ControllerName, string ActionName, string FormMethod)
         {
-            return GetUserPermission(AreaName, ControllerName, ActionName, FormMethod) != null;
+            var hasPermission =GetUserPermission(AreaName, ControllerName, ActionName, FormMethod) != null;
+            return hasPermission;
         }
 
-        private Model.Permission GetUserPermission(string areaName, string controllerName, string actionName, int formMethod)
+        public Model.Permission GetUserPermission(string areaName, string controllerName, string actionName, string formMethod)
         {
-            return CurrentUserPermissions.SingleOrDefault
-                (p => p.permissionAreaName == areaName 
-                    && p.permissionControllerName == controllerName 
-                    && p.permissionActionName == actionName 
-                    && (p.permissionFormMethod == 3 || (p.permissionFormMethod == formMethod)));
+            int intFormMethod = formMethod.ToLower() == "get" ? 1 : 2;
+            var currentUserPermission = CurrentUserPermissions.SingleOrDefault(
+                (p => p.permissionAreaName.ToLower() == areaName.ToLower()
+                    && p.permissionControllerName.ToLower() == controllerName.ToLower()
+                    && p.permissionActionName.ToLower() == actionName.ToLower()
+                    && (p.permissionFormMethod == 3 || (p.permissionFormMethod == intFormMethod))));
+            return currentUserPermission;
         }
 
-       
-        public JsonResult AjaxMessage(AjaxMessageStatus status, string message, string backUrl, object data)
+
+        public JsonResult SendAjaxMessage(AjaxMessageStatus status, string message, string backUrl, object data)
         {
             EasyUIModel_AjaxMessage ajaxMessage = new EasyUIModel_AjaxMessage()
             {
@@ -95,7 +101,24 @@ namespace Simon8029.EMPDemo.WebApp
             };
             return new JsonResult()
             {
-                Data = ajaxMessage, JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                Data = ajaxMessage,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+
+        public ContentResult SendJsMessage(string message, string backUrl)
+        {
+            StringBuilder stringBuilder = new StringBuilder("<script> alert(\"").Append(message).Append("\");");
+            if (!string.IsNullOrEmpty(backUrl))
+            {
+                stringBuilder.Append("if(window.top!=window)window.top.location=\"").Append(backUrl).Append("\";");
+                stringBuilder.Append("else window.location=\"").Append(backUrl).Append("\";");
+            }
+            stringBuilder.Append("</script>");
+            return new ContentResult()
+            {
+                Content = stringBuilder.ToString()
             };
         }
 

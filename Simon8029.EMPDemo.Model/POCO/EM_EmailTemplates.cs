@@ -13,16 +13,16 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_EmailTemplates ToPOCO(){
 			return new EM_EmailTemplates(){
-			EmailTemplateID=this.EmailTemplateID,
-			EmailTemplateTypeID=this.EmailTemplateTypeID,
-			TemplateTypeID=this.TemplateTypeID,
-			Template=this.Template,
-			Enabled=this.Enabled,
-			ExpireDate=this.ExpireDate,
-			CreatedDate=this.CreatedDate,
-			CreatedBy=this.CreatedBy,
-			UpdatedDate=this.UpdatedDate,
-			Updatedby=this.Updatedby,
+								EmailTemplateID=this.EmailTemplateID,
+				EmailTemplateTypeID=this.EmailTemplateTypeID,
+				TemplateTypeID=this.TemplateTypeID,
+				Template=this.Template,
+				Enabled=this.Enabled,
+				ExpireDate=this.ExpireDate,
+				CreatedDate=this.CreatedDate,
+				CreatedBy=this.CreatedBy,
+				UpdatedDate=this.UpdatedDate,
+				Updatedby=this.Updatedby,
 			};
 		}
 	}

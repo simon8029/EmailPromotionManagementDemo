@@ -13,11 +13,11 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public Department ToPOCO(){
 			return new Department(){
-			departmentID=this.departmentID,
-			departmentName=this.departmentName,
-			departmentRemark=this.departmentRemark,
-			departmentIsDeleted=this.departmentIsDeleted,
-			departmentAddTime=this.departmentAddTime,
+								departmentID=this.departmentID,
+				departmentName=this.departmentName,
+				departmentRemark=this.departmentRemark,
+				departmentIsDeleted=this.departmentIsDeleted,
+				departmentAddTime=this.departmentAddTime,
 			};
 		}
 	}

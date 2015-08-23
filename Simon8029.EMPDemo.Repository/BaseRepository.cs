@@ -33,6 +33,18 @@ namespace Simon8029.EMPDemo.Repository
             return _dbSet.Where(whereExpression);
         }
 
+        public IQueryable<TEntity> Get<TKey>(Expression<Func<TEntity, bool>> @where, Expression<Func<TEntity, TKey>> orderBy, bool isAsc = true)
+        {
+            if (isAsc)
+            {
+                return _dbSet.Where(where).OrderBy(orderBy);
+            }
+            else
+            {
+                return _dbSet.Where(where).OrderByDescending(orderBy);
+            }
+        }
+
         /// <summary>
         /// 修改指定实体的指定属性值
         /// </summary>

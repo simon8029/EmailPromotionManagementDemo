@@ -4,33 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="411ef345332340afaf7f8be4d75d581a" Name="Diagram1">
-        <EntityTypeShape EntityType="EPMDemoModel.EM_CampaignInstances" Width="2" PointX="5.25" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_Campaigns" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailInstances" Width="1.875" PointX="2.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailTemplates" Width="2" PointX="8.375" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_EmailTemplateTypes" Width="2.375" PointX="8.125" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_Events" Width="1.5" PointX="8" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EPMDemoModel.EM_Leads" Width="1.5" PointX="5.625" PointY="6" IsExpanded="true" />
-        <AssociationConnector Association="EPMDemoModel.EM_EmailInstances_EM_CampaignInstances_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="EPMDemoModel.EM_Events_EM_CampaignInstances_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="EPMDemoModel.EM_Leads_EM_CampaignInstances_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="EPMDemoModel.EM_Campaigns_EM_EmailInstances_FK1" ManuallyRouted="false" />
-        <AssociationConnector Association="EPMDemoModel.EM_EmailTemplateTypes_EM_EmailTemplates_FK1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EPMDemoModel.Department" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="EPMDemoModel.Employee" Width="1.5" PointX="2.75" PointY="6.75" />
-        <AssociationConnector Association="EPMDemoModel.FK_Employee_Department" />
-        <EntityTypeShape EntityType="EPMDemoModel.employeeRoleRelationship" Width="1.5" PointX="10.625" PointY="11.625" />
-        <EntityTypeShape EntityType="EPMDemoModel.Permission" Width="1.5" PointX="5.375" PointY="10.125" />
-        <EntityTypeShape EntityType="EPMDemoModel.Role" Width="1.5" PointX="5.375" PointY="16.25" />
-        <EntityTypeShape EntityType="EPMDemoModel.RolePermissionRelationship" Width="1.5" PointX="7.625" PointY="12.375" />
-        <EntityTypeShape EntityType="EPMDemoModel.VipPermission" Width="1.5" PointX="7.625" PointY="9.75" />
-        <AssociationConnector Association="EPMDemoModel.FK_employeeRoleRelationship_Employee" />
-        <AssociationConnector Association="EPMDemoModel.FK_VipPermission_Employee" />
-        <AssociationConnector Association="EPMDemoModel.FK_employeeRoleRelationship_Role" />
-        <AssociationConnector Association="EPMDemoModel.FK_RolePermissionRelationship_Permission" />
-        <AssociationConnector Association="EPMDemoModel.FK_VipPermission_Permission" />
-        <AssociationConnector Association="EPMDemoModel.FK_RolePermissionRelationship_Role" />
+      <Diagram DiagramId="50925ae38b674ab48b26c08943eff80f" Name="Diagram1">
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.Department" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_CampaignInstances" Width="1.5" PointX="10.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_Campaigns" Width="1.5" PointX="5.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_EmailInstances" Width="1.5" PointX="8" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_EmailTemplates" Width="1.5" PointX="13" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_EmailTemplateTypes" Width="1.5" PointX="10.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_Events" Width="1.5" PointX="8" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.EM_Leads" Width="1.5" PointX="8" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.Employee" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.employeeRoleRelationship" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.Permission" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.Role" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.RolePermissionRelationship" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Simon8029CRMDemoModel.VipPermission" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_Employee_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.EM_EmailInstances_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.EM_Events_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.EM_Leads_EM_CampaignInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.EM_Campaigns_EM_EmailInstances_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.EM_EmailTemplateTypes_EM_EmailTemplates_FK1" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_employeeRoleRelationship_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_VipPermission_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_employeeRoleRelationship_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_RolePermissionRelationship_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_VipPermission_Permission" ManuallyRouted="false" />
+        <AssociationConnector Association="Simon8029CRMDemoModel.FK_RolePermissionRelationship_Role" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

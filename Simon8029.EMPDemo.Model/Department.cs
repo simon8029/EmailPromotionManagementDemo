@@ -16,15 +16,15 @@ namespace Simon8029.EMPDemo.Model
     {
         public Department()
         {
-            this.Employee = new HashSet<Employee>();
-        } 
+            this.Employees = new HashSet<Employee>();
+        }
     
         public int departmentID { get; set; }
-        public byte[] departmentName { get; set; }
-        public byte[] departmentRemark { get; set; }
+        public string departmentName { get; set; }
+        public string departmentRemark { get; set; }
         public bool departmentIsDeleted { get; set; }
         public System.DateTime departmentAddTime { get; set; }
     
-        public virtual ICollection<Employee> Employee { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

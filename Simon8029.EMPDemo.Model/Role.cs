@@ -16,9 +16,9 @@ namespace Simon8029.EMPDemo.Model
     {
         public Role()
         {
-            this.employeeRoleRelationship = new HashSet<employeeRoleRelationship>();
-            this.RolePermissionRelationship = new HashSet<RolePermissionRelationship>();
-        } 
+            this.employeeRoleRelationships = new HashSet<employeeRoleRelationship>();
+            this.RolePermissionRelationships = new HashSet<RolePermissionRelationship>();
+        }
     
         public int roleID { get; set; }
         public Nullable<int> roleDepartmentID { get; set; }
@@ -26,7 +26,7 @@ namespace Simon8029.EMPDemo.Model
         public bool roleIsDeleted { get; set; }
         public System.DateTime roleAddTime { get; set; }
     
-        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationship { get; set; }
-        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationship { get; set; }
+        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationships { get; set; }
+        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationships { get; set; }
     }
 }

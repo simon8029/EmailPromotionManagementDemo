@@ -13,22 +13,22 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_Campaigns ToPOCO(){
 			return new EM_Campaigns(){
-			CampaignID=this.CampaignID,
-			StartDate=this.StartDate,
-			EndDate=this.EndDate,
-			CampaignName=this.CampaignName,
-			CampaignDesc=this.CampaignDesc,
-			Owner=this.Owner,
-			ApprovalRequest=this.ApprovalRequest,
-			Approved=this.Approved,
-			ApprovedBy=this.ApprovedBy,
-			ApprovedDate=this.ApprovedDate,
-			Guid=this.Guid,
-			Submitted=this.Submitted,
-			CreatedDate=this.CreatedDate,
-			CreatedBy=this.CreatedBy,
-			UpdatedDate=this.UpdatedDate,
-			UpdatedBy=this.UpdatedBy,
+								CampaignID=this.CampaignID,
+				StartDate=this.StartDate,
+				EndDate=this.EndDate,
+				CampaignName=this.CampaignName,
+				CampaignDesc=this.CampaignDesc,
+				Owner=this.Owner,
+				ApprovalRequest=this.ApprovalRequest,
+				Approved=this.Approved,
+				ApprovedBy=this.ApprovedBy,
+				ApprovedDate=this.ApprovedDate,
+				Guid=this.Guid,
+				Submitted=this.Submitted,
+				CreatedDate=this.CreatedDate,
+				CreatedBy=this.CreatedBy,
+				UpdatedDate=this.UpdatedDate,
+				UpdatedBy=this.UpdatedBy,
 			};
 		}
 	}

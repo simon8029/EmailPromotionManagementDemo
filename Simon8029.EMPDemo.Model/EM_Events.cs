@@ -17,7 +17,7 @@ namespace Simon8029.EMPDemo.Model
         public EM_Events()
         {
             this.EM_CampaignInstances = new HashSet<EM_CampaignInstances>();
-        } 
+        }
     
         public int EventID { get; set; }
         public string EventName { get; set; }

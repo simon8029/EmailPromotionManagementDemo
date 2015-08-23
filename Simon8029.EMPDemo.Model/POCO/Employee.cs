@@ -13,16 +13,16 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public Employee ToPOCO(){
 			return new Employee(){
-			employeeID=this.employeeID,
-			employeeDepartmentID=this.employeeDepartmentID,
-			employeeCnName=this.employeeCnName,
-			employeeLoginName=this.employeeLoginName,
-			employeeLoginPassword=this.employeeLoginPassword,
-			employeeGender=this.employeeGender,
-			employeePhone=this.employeePhone,
-			employeeAddress=this.employeeAddress,
-			employeeIsDeleted=this.employeeIsDeleted,
-			employeeAddTime=this.employeeAddTime,
+								employeeID=this.employeeID,
+				employeeDepartmentID=this.employeeDepartmentID,
+				employeeCnName=this.employeeCnName,
+				employeeLoginName=this.employeeLoginName,
+				employeeLoginPassword=this.employeeLoginPassword,
+				employeeGender=this.employeeGender,
+				employeePhone=this.employeePhone,
+				employeeAddress=this.employeeAddress,
+				employeeIsDeleted=this.employeeIsDeleted,
+				employeeAddTime=this.employeeAddTime,
 			};
 		}
 	}

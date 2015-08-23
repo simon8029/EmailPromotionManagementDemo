@@ -65,6 +65,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EMPDemoModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EMPDemoModelExtensions\PermissionExtension.cs" />
     <Compile Include="Employee.cs">
       <DependentUpon>EMPDemoModel.tt</DependentUpon>
     </Compile>
@@ -94,6 +95,7 @@
     </Compile>
     <Compile Include="ModelsForEasyUI\EasyUIModel_AjaxMessage.cs" />
     <Compile Include="ModelsForEasyUI\EasyUIModel_PageData.cs" />
+    <Compile Include="ModelsForEasyUI\EasyUIModel_MenuTreeNode.cs" />
     <Compile Include="Permission.cs">
       <DependentUpon>EMPDemoModel.tt</DependentUpon>
     </Compile>
@@ -131,9 +133,9 @@
       <DependentUpon>POCO.tt</DependentUpon>
     </Compile>
     <Compile Include="POCO\POCO.cs">
+      <DependentUpon>POCO.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>POCO.tt</DependentUpon>
     </Compile>
     <Compile Include="POCO\Role.cs">
       <DependentUpon>POCO.tt</DependentUpon>
@@ -156,13 +158,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <EntityDeploy Include="EMPDemoModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EMPDemoModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
     <None Include="EMPDemoModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EMPDemoModel.edmx</DependentUpon>

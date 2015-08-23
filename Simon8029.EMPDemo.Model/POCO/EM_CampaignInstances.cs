@@ -13,18 +13,18 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_CampaignInstances ToPOCO(){
 			return new EM_CampaignInstances(){
-			CampaignInstanceID=this.CampaignInstanceID,
-			EmailInstanceID=this.EmailInstanceID,
-			LeadID=this.LeadID,
-			IsSent=this.IsSent,
-			EventID=this.EventID,
-			EventStatus=this.EventStatus,
-			EventDate=this.EventDate,
-			Guid=this.Guid,
-			CreatedDate=this.CreatedDate,
-			CreatedBy=this.CreatedBy,
-			UpdatedDate=this.UpdatedDate,
-			UpdatedBy=this.UpdatedBy,
+								CampaignInstanceID=this.CampaignInstanceID,
+				EmailInstanceID=this.EmailInstanceID,
+				LeadID=this.LeadID,
+				IsSent=this.IsSent,
+				EventID=this.EventID,
+				EventStatus=this.EventStatus,
+				EventDate=this.EventDate,
+				Guid=this.Guid,
+				CreatedDate=this.CreatedDate,
+				CreatedBy=this.CreatedBy,
+				UpdatedDate=this.UpdatedDate,
+				UpdatedBy=this.UpdatedBy,
 			};
 		}
 	}

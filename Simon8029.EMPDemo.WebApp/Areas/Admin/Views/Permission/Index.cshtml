@@ -1,0 +1,108 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section headSection{
+    <style type="text/css">
+    </style>
+    <script src="~/Scripts/jquery.globalHelper.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("", "", [[
+                {
+                    field: 'perIsShow', title: '是菜单', width: 20, formatter: function (colData) {
+                        return colData ? "√" : "X";
+                    }
+                },
+                { field: 'perName', title: '权限名称', width: 100 },
+                { field: 'perAreaName', title: '区域名称', width: 100 },
+                { field: 'perControllerName', title: '控制器名称', width: 100 },
+                { field: 'perActionName', title: 'Action名称', width: 100 },
+                {
+                    field: 'perFormMethod', title: '请求方式', width: 50, formatter: function (colData) {
+                        switch (colData) {
+                            case 1:
+                                return "GET";
+                            case 2:
+                                return "POST";
+                            case 3:
+                                return "BOTH";
+                        }
+                    }
+                },
+                {
+                    field: 'perOperationType', title: '操作类型', width: 50, formatter: function (colData) {
+                        switch (colData) {
+                            case 1:
+                                return "MENU";
+                            case 2:
+                                return "BUTTON";
+                            case 3:
+                                return "AJAX";
+                        }
+                    }
+                },
+                { field: 'perOrder', title: '排序', width: 50 }
+            ]]);
+
+            $("#tbList").datagrid($.globalHelper.datagridPara.paras);
+        });
+
+        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
+        @if (Html.IsButtonExist("add"))
+        {
+            <text>
+    function add()
+    {
+        $.globalHelper.showCommonWindow("新增权限","/admin/permission/add",450,560);
+    }
+    </text>
+        }
+    @if (Html.IsButtonExist("viewSons"))
+        {
+            <text>
+    function viewSons()//查看子权限
+    {
+        ifSelected(function (perData) {
+            $.globalHelper.showCommonWindow("查看【" + perData.perName + "】子权限列表", "/admin/permission/SonIndex/" + perData.perId);
+        })
+    }
+    </text>
+        }
+    @if (Html.IsButtonExist("remove"))
+        {
+            <text>
+    function remove()
+    {
+    }
+    </text>
+        }
+    @if (Html.IsButtonExist("modify"))
+        {
+            <text>
+    function modify()
+    {
+        ifSelected(function (selectedRowData) {
+            $.globalHelper.showCommonWindow("修改【" + selectedRowData.perName + "】权限", "/admin/permission/modify/" + selectedRowData.perId, 450, 560);
+        })
+    }
+    </text>
+        }
+
+    //统一判断 是否有选中行，如果有，则调用回到函数（func），并传入 选中行的数据
+    function ifSelected(func)
+    {
+        //获取选中行的数据
+        var selectedRowData = $("#tbList").datagrid("getSelected");
+        if (selectedRowData) {
+            if (func && func instanceof Function)
+            {
+                func(selectedRowData);//调用回调函数，并传入 选中行的数据
+            }
+        } else {
+            $.msgBoxObj.showInfo("请选中要操作的行 ~~~");
+        }
+    }
+    </script>
+}
+<table id="tbList"></table>

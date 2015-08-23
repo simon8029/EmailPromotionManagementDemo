@@ -17,7 +17,7 @@ namespace Simon8029.EMPDemo.Model
         public EM_Leads()
         {
             this.EM_CampaignInstances = new HashSet<EM_CampaignInstances>();
-        } 
+        }
     
         public int LeadID { get; set; }
         public string FirstName { get; set; }

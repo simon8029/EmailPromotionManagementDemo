@@ -32,6 +32,11 @@ namespace Simon8029.EMPDemo.Service
             return IbaseRepository.Get(whereExpression);
         }
 
+        public IQueryable<TEntity> Get<TKey>(Expression<Func<TEntity, bool>> @where, Expression<Func<TEntity, TKey>> orderBy, bool isAsc = true)
+        {
+            return IbaseRepository.Get<TKey>(where, orderBy, isAsc);
+        }
+
         public void Update(TEntity entity, params string[] properties)
         {
             IbaseRepository.Update(entity,properties);

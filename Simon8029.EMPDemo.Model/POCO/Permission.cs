@@ -13,22 +13,22 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public Permission ToPOCO(){
 			return new Permission(){
-			permissionID=this.permissionID,
-			permissionParentID=this.permissionParentID,
-			permissionName=this.permissionName,
-			permissionRemark=this.permissionRemark,
-			permissionAreaName=this.permissionAreaName,
-			permissionControllerName=this.permissionControllerName,
-			permissionActionName=this.permissionActionName,
-			permissionFormMethod=this.permissionFormMethod,
-			permissionOperationType=this.permissionOperationType,
-			permissionJSMethodName=this.permissionJSMethodName,
-			permissionIcon=this.permissionIcon,
-			permissionIsLink=this.permissionIsLink,
-			permissionOrder=this.permissionOrder,
-			permissionIsShow=this.permissionIsShow,
-			permissionIsDeleted=this.permissionIsDeleted,
-			permissionAddTime=this.permissionAddTime,
+								permissionID=this.permissionID,
+				permissionParentID=this.permissionParentID,
+				permissionName=this.permissionName,
+				permissionRemark=this.permissionRemark,
+				permissionAreaName=this.permissionAreaName,
+				permissionControllerName=this.permissionControllerName,
+				permissionActionName=this.permissionActionName,
+				permissionFormMethod=this.permissionFormMethod,
+				permissionOperationType=this.permissionOperationType,
+				permissionJSMethodName=this.permissionJSMethodName,
+				permissionIcon=this.permissionIcon,
+				permissionIsLink=this.permissionIsLink,
+				permissionOrder=this.permissionOrder,
+				permissionIsShow=this.permissionIsShow,
+				permissionIsDeleted=this.permissionIsDeleted,
+				permissionAddTime=this.permissionAddTime,
 			};
 		}
 	}

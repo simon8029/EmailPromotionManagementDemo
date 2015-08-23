@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EPMDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Simon8029CRMDemoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="departmentID" />
           </Key>
           <Property Name="departmentID" Type="int" Nullable="false" />
-          <Property Name="departmentName" Type="varbinary" MaxLength="50" Nullable="false" />
-          <Property Name="departmentRemark" Type="varbinary" MaxLength="200" />
+          <Property Name="departmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="departmentRemark" Type="varchar" MaxLength="200" />
           <Property Name="departmentIsDeleted" Type="bit" Nullable="false" />
           <Property Name="departmentAddTime" Type="datetime" Nullable="false" />
         </EntityType>
@@ -121,7 +121,7 @@
           <Property Name="employeeDepartmentID" Type="int" />
           <Property Name="employeeCnName" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="employeeLoginName" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="employeeLoginPassword" Type="char" MaxLength="30" Nullable="false" />
+          <Property Name="employeeLoginPassword" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="employeeGender" Type="bit" Nullable="false" />
           <Property Name="employeePhone" Type="varchar" MaxLength="50" />
           <Property Name="employeeAddress" Type="varchar" MaxLength="200" />
@@ -143,18 +143,18 @@
           <Property Name="permissionID" Type="int" Nullable="false" />
           <Property Name="permissionParentID" Type="int" Nullable="false" />
           <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="permissionRemark" Type="varbinary" MaxLength="350" />
+          <Property Name="permissionRemark" Type="varchar" MaxLength="150" />
           <Property Name="permissionAreaName" Type="varchar" MaxLength="150" />
           <Property Name="permissionControllerName" Type="varchar" MaxLength="150" />
           <Property Name="permissionActionName" Type="varchar" MaxLength="150" />
           <Property Name="permissionFormMethod" Type="smallint" Nullable="false" />
           <Property Name="permissionOperationType" Type="smallint" Nullable="false" />
-          <Property Name="permissionJSMethodName" Type="varbinary" MaxLength="100" />
+          <Property Name="permissionJSMethodName" Type="varchar" MaxLength="100" />
           <Property Name="permissionIcon" Type="varchar" MaxLength="150" />
           <Property Name="permissionIsLink" Type="bit" Nullable="false" />
           <Property Name="permissionOrder" Type="int" Nullable="false" />
           <Property Name="permissionIsShow" Type="bit" Nullable="false" />
-          <Property Name="permissionIsDeleted" Type="bigint" Nullable="false" />
+          <Property Name="permissionIsDeleted" Type="bit" Nullable="false" />
           <Property Name="permissionAddTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Role">
@@ -327,7 +327,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EPMDemoModelStoreContainer">
+        <Function Name="EM_CampaignInstances_INSERT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailInstanceID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="Simon8029CRMDemoModelStoreContainer">
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EM_CampaignInstances" EntityType="Self.EM_CampaignInstances" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EM_Campaigns" EntityType="Self.EM_Campaigns" Schema="dbo" store:Type="Tables" />
@@ -391,10 +394,22 @@
             <End Role="VipPermission" EntitySet="VipPermission" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EPMDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Simon8029CRMDemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="departmentID" />
+          </Key>
+          <Property Name="departmentID" Type="Int32" Nullable="false" />
+          <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departmentRemark" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="departmentIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="departmentAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
+        </EntityType>
         <EntityType Name="EM_CampaignInstances">
           <Key>
             <PropertyRef Name="CampaignInstanceID" />
@@ -503,6 +518,101 @@
           <Property Name="Unsubscribed" Type="Boolean" />
           <NavigationProperty Name="EM_CampaignInstances" Relationship="Self.EM_Leads_EM_CampaignInstances_FK1" FromRole="EM_Leads" ToRole="EM_CampaignInstances" />
         </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="employeeID" />
+          </Key>
+          <Property Name="employeeID" Type="Int32" Nullable="false" />
+          <Property Name="employeeDepartmentID" Type="Int32" />
+          <Property Name="employeeCnName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="employeeLoginName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeLoginPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="employeeGender" Type="Boolean" Nullable="false" />
+          <Property Name="employeePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employeeAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="employeeIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="employeeAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="employeeRoleRelationships" Relationship="Self.FK_employeeRoleRelationship_Employee" FromRole="Employee" ToRole="employeeRoleRelationship" />
+          <NavigationProperty Name="VipPermissions" Relationship="Self.FK_VipPermission_Employee" FromRole="Employee" ToRole="VipPermission" />
+        </EntityType>
+        <EntityType Name="employeeRoleRelationship">
+          <Key>
+            <PropertyRef Name="employeeRoleRelationID" />
+          </Key>
+          <Property Name="employeeRoleRelationID" Type="Int32" Nullable="false" />
+          <Property Name="employeeID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_employeeRoleRelationship_Employee" FromRole="employeeRoleRelationship" ToRole="Employee" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_employeeRoleRelationship_Role" FromRole="employeeRoleRelationship" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="permissionID" />
+          </Key>
+          <Property Name="permissionID" Type="Int32" Nullable="false" />
+          <Property Name="permissionParentID" Type="Int32" Nullable="false" />
+          <Property Name="permissionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="permissionRemark" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="permissionAreaName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="permissionControllerName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="permissionActionName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="permissionFormMethod" Type="Int16" Nullable="false" />
+          <Property Name="permissionOperationType" Type="Int16" Nullable="false" />
+          <Property Name="permissionJSMethodName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="permissionIcon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="permissionIsLink" Type="Boolean" Nullable="false" />
+          <Property Name="permissionOrder" Type="Int32" Nullable="false" />
+          <Property Name="permissionIsShow" Type="Boolean" Nullable="false" />
+          <Property Name="permissionIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="permissionAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RolePermissionRelationships" Relationship="Self.FK_RolePermissionRelationship_Permission" FromRole="Permission" ToRole="RolePermissionRelationship" />
+          <NavigationProperty Name="VipPermissions" Relationship="Self.FK_VipPermission_Permission" FromRole="Permission" ToRole="VipPermission" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" Nullable="false" />
+          <Property Name="roleDepartmentID" Type="Int32" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="roleIsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="roleAddTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="employeeRoleRelationships" Relationship="Self.FK_employeeRoleRelationship_Role" FromRole="Role" ToRole="employeeRoleRelationship" />
+          <NavigationProperty Name="RolePermissionRelationships" Relationship="Self.FK_RolePermissionRelationship_Role" FromRole="Role" ToRole="RolePermissionRelationship" />
+        </EntityType>
+        <EntityType Name="RolePermissionRelationship">
+          <Key>
+            <PropertyRef Name="rolePermissionRelationID" />
+          </Key>
+          <Property Name="rolePermissionRelationID" Type="Int32" Nullable="false" />
+          <Property Name="roleID" Type="Int32" Nullable="false" />
+          <Property Name="permissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_RolePermissionRelationship_Permission" FromRole="RolePermissionRelationship" ToRole="Permission" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_RolePermissionRelationship_Role" FromRole="RolePermissionRelationship" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="VipPermission">
+          <Key>
+            <PropertyRef Name="vipPermissionID" />
+          </Key>
+          <Property Name="vipPermissionID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="permissionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_VipPermission_Employee" FromRole="VipPermission" ToRole="Employee" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK_VipPermission_Permission" FromRole="VipPermission" ToRole="Permission" />
+        </EntityType>
+        <Association Name="FK_Employee_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="departmentID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="employeeDepartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="EM_EmailInstances_EM_CampaignInstances_FK1">
           <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="0..1" />
           <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
@@ -563,7 +673,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="EPMDemoEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_employeeRoleRelationship_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="employeeRoleRelationship" Type="Self.employeeRoleRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="employeeRoleRelationship">
+              <PropertyRef Name="employeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VipPermission_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="VipPermission" Type="Self.VipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="employeeID" />
+            </Principal>
+            <Dependent Role="VipPermission">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_employeeRoleRelationship_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="employeeRoleRelationship" Type="Self.employeeRoleRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="employeeRoleRelationship">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissionRelationship_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="RolePermissionRelationship" Type="Self.RolePermissionRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="permissionID" />
+            </Principal>
+            <Dependent Role="RolePermissionRelationship">
+              <PropertyRef Name="permissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VipPermission_Permission">
+          <End Role="Permission" Type="Self.Permission" Multiplicity="1" />
+          <End Role="VipPermission" Type="Self.VipPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permission">
+              <PropertyRef Name="permissionID" />
+            </Principal>
+            <Dependent Role="VipPermission">
+              <PropertyRef Name="permissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RolePermissionRelationship_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="RolePermissionRelationship" Type="Self.RolePermissionRelationship" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="RolePermissionRelationship">
+              <PropertyRef Name="roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="EM_CampaignInstances" EntityType="Self.EM_CampaignInstances" />
           <EntitySet Name="EM_Campaigns" EntityType="Self.EM_Campaigns" />
           <EntitySet Name="EM_EmailInstances" EntityType="Self.EM_EmailInstances" />
@@ -571,6 +754,16 @@
           <EntitySet Name="EM_EmailTemplateTypes" EntityType="Self.EM_EmailTemplateTypes" />
           <EntitySet Name="EM_Events" EntityType="Self.EM_Events" />
           <EntitySet Name="EM_Leads" EntityType="Self.EM_Leads" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="employeeRoleRelationships" EntityType="Self.employeeRoleRelationship" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="RolePermissionRelationships" EntityType="Self.RolePermissionRelationship" />
+          <EntitySet Name="VipPermissions" EntityType="Self.VipPermission" />
+          <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
           <AssociationSet Name="EM_EmailInstances_EM_CampaignInstances_FK1" Association="Self.EM_EmailInstances_EM_CampaignInstances_FK1">
             <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
             <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
@@ -591,228 +784,53 @@
             <End Role="EM_EmailTemplateTypes" EntitySet="EM_EmailTemplateTypes" />
             <End Role="EM_EmailTemplates" EntitySet="EM_EmailTemplates" />
           </AssociationSet>
-          <EntitySet Name="Department" EntityType="EPMDemoModel.Department" />
-          <EntitySet Name="Employee" EntityType="EPMDemoModel.Employee" />
-          <AssociationSet Name="FK_Employee_Department" Association="EPMDemoModel.FK_Employee_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="Employee" EntitySet="Employee" />
+          <AssociationSet Name="FK_employeeRoleRelationship_Employee" Association="Self.FK_employeeRoleRelationship_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="employeeRoleRelationship" EntitySet="employeeRoleRelationships" />
           </AssociationSet>
-          <EntitySet Name="employeeRoleRelationship" EntityType="EPMDemoModel.employeeRoleRelationship" />
-          <EntitySet Name="Permission" EntityType="EPMDemoModel.Permission" />
-          <EntitySet Name="Role" EntityType="EPMDemoModel.Role" />
-          <EntitySet Name="RolePermissionRelationship" EntityType="EPMDemoModel.RolePermissionRelationship" />
-          <EntitySet Name="VipPermission" EntityType="EPMDemoModel.VipPermission" />
-          <AssociationSet Name="FK_employeeRoleRelationship_Employee" Association="EPMDemoModel.FK_employeeRoleRelationship_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="employeeRoleRelationship" EntitySet="employeeRoleRelationship" />
+          <AssociationSet Name="FK_VipPermission_Employee" Association="Self.FK_VipPermission_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="VipPermission" EntitySet="VipPermissions" />
           </AssociationSet>
-          <AssociationSet Name="FK_VipPermission_Employee" Association="EPMDemoModel.FK_VipPermission_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="VipPermission" EntitySet="VipPermission" />
+          <AssociationSet Name="FK_employeeRoleRelationship_Role" Association="Self.FK_employeeRoleRelationship_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="employeeRoleRelationship" EntitySet="employeeRoleRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK_employeeRoleRelationship_Role" Association="EPMDemoModel.FK_employeeRoleRelationship_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="employeeRoleRelationship" EntitySet="employeeRoleRelationship" />
+          <AssociationSet Name="FK_RolePermissionRelationship_Permission" Association="Self.FK_RolePermissionRelationship_Permission">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="RolePermissionRelationship" EntitySet="RolePermissionRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK_RolePermissionRelationship_Permission" Association="EPMDemoModel.FK_RolePermissionRelationship_Permission">
-            <End Role="Permission" EntitySet="Permission" />
-            <End Role="RolePermissionRelationship" EntitySet="RolePermissionRelationship" />
+          <AssociationSet Name="FK_VipPermission_Permission" Association="Self.FK_VipPermission_Permission">
+            <End Role="Permission" EntitySet="Permissions" />
+            <End Role="VipPermission" EntitySet="VipPermissions" />
           </AssociationSet>
-          <AssociationSet Name="FK_VipPermission_Permission" Association="EPMDemoModel.FK_VipPermission_Permission">
-            <End Role="Permission" EntitySet="Permission" />
-            <End Role="VipPermission" EntitySet="VipPermission" />
+          <AssociationSet Name="FK_RolePermissionRelationship_Role" Association="Self.FK_RolePermissionRelationship_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="RolePermissionRelationship" EntitySet="RolePermissionRelationships" />
           </AssociationSet>
-          <AssociationSet Name="FK_RolePermissionRelationship_Role" Association="EPMDemoModel.FK_RolePermissionRelationship_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="RolePermissionRelationship" EntitySet="RolePermissionRelationship" />
-          </AssociationSet>
+          <FunctionImport Name="EM_CampaignInstances_INSERT">
+            <Parameter Name="EmailInstanceID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <EntityType Name="Department">
-          <Key>
-            <PropertyRef Name="departmentID" />
-          </Key>
-          <Property Name="departmentID" Type="Int32" Nullable="false" />
-          <Property Name="departmentName" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
-          <Property Name="departmentRemark" Type="Binary" MaxLength="200" FixedLength="false" />
-          <Property Name="departmentIsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="departmentAddTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Employee" Relationship="EPMDemoModel.FK_Employee_Department" FromRole="Department" ToRole="Employee" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="employeeID" />
-          </Key>
-          <Property Name="employeeID" Type="Int32" Nullable="false" />
-          <Property Name="employeeDepartmentID" Type="Int32" />
-          <Property Name="employeeCnName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="employeeLoginName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="employeeLoginPassword" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="false" />
-          <Property Name="employeeGender" Type="Boolean" Nullable="false" />
-          <Property Name="employeePhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="employeeAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="employeeIsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="employeeAddTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Department" Relationship="EPMDemoModel.FK_Employee_Department" FromRole="Employee" ToRole="Department" />
-          <NavigationProperty Name="employeeRoleRelationship" Relationship="EPMDemoModel.FK_employeeRoleRelationship_Employee" FromRole="Employee" ToRole="employeeRoleRelationship" />
-          <NavigationProperty Name="VipPermission" Relationship="EPMDemoModel.FK_VipPermission_Employee" FromRole="Employee" ToRole="VipPermission" />
-        </EntityType>
-        <Association Name="FK_Employee_Department">
-          <End Type="EPMDemoModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="EPMDemoModel.Employee" Role="Employee" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="departmentID" />
-            </Principal>
-            <Dependent Role="Employee">
-              <PropertyRef Name="employeeDepartmentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="employeeRoleRelationship">
-          <Key>
-            <PropertyRef Name="employeeRoleRelationID" />
-          </Key>
-          <Property Name="employeeRoleRelationID" Type="Int32" Nullable="false" />
-          <Property Name="employeeID" Type="Int32" Nullable="false" />
-          <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="EPMDemoModel.FK_employeeRoleRelationship_Employee" FromRole="employeeRoleRelationship" ToRole="Employee" />
-          <NavigationProperty Name="Role" Relationship="EPMDemoModel.FK_employeeRoleRelationship_Role" FromRole="employeeRoleRelationship" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="Permission">
-          <Key>
-            <PropertyRef Name="permissionID" />
-          </Key>
-          <Property Name="permissionID" Type="Int32" Nullable="false" />
-          <Property Name="permissionParentID" Type="Int32" Nullable="false" />
-          <Property Name="permissionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="permissionRemark" Type="Binary" MaxLength="350" FixedLength="false" />
-          <Property Name="permissionAreaName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="permissionControllerName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="permissionActionName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="permissionFormMethod" Type="Int16" Nullable="false" />
-          <Property Name="permissionOperationType" Type="Int16" Nullable="false" />
-          <Property Name="permissionJSMethodName" Type="Binary" MaxLength="100" FixedLength="false" />
-          <Property Name="permissionIcon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="permissionIsLink" Type="Boolean" Nullable="false" />
-          <Property Name="permissionOrder" Type="Int32" Nullable="false" />
-          <Property Name="permissionIsShow" Type="Boolean" Nullable="false" />
-          <Property Name="permissionIsDeleted" Type="Int64" Nullable="false" />
-          <Property Name="permissionAddTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RolePermissionRelationship" Relationship="EPMDemoModel.FK_RolePermissionRelationship_Permission" FromRole="Permission" ToRole="RolePermissionRelationship" />
-          <NavigationProperty Name="VipPermission" Relationship="EPMDemoModel.FK_VipPermission_Permission" FromRole="Permission" ToRole="VipPermission" />
-        </EntityType>
-        <EntityType Name="Role">
-          <Key>
-            <PropertyRef Name="roleID" />
-          </Key>
-          <Property Name="roleID" Type="Int32" Nullable="false" />
-          <Property Name="roleDepartmentID" Type="Int32" />
-          <Property Name="roleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="roleIsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="roleAddTime" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="employeeRoleRelationship" Relationship="EPMDemoModel.FK_employeeRoleRelationship_Role" FromRole="Role" ToRole="employeeRoleRelationship" />
-          <NavigationProperty Name="RolePermissionRelationship" Relationship="EPMDemoModel.FK_RolePermissionRelationship_Role" FromRole="Role" ToRole="RolePermissionRelationship" />
-        </EntityType>
-        <EntityType Name="RolePermissionRelationship">
-          <Key>
-            <PropertyRef Name="rolePermissionRelationID" />
-          </Key>
-          <Property Name="rolePermissionRelationID" Type="Int32" Nullable="false" />
-          <Property Name="roleID" Type="Int32" Nullable="false" />
-          <Property Name="permissionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Permission" Relationship="EPMDemoModel.FK_RolePermissionRelationship_Permission" FromRole="RolePermissionRelationship" ToRole="Permission" />
-          <NavigationProperty Name="Role" Relationship="EPMDemoModel.FK_RolePermissionRelationship_Role" FromRole="RolePermissionRelationship" ToRole="Role" />
-        </EntityType>
-        <EntityType Name="VipPermission">
-          <Key>
-            <PropertyRef Name="vipPermissionID" />
-          </Key>
-          <Property Name="vipPermissionID" Type="Int32" Nullable="false" />
-          <Property Name="userID" Type="Int32" Nullable="false" />
-          <Property Name="permissionID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Employee" Relationship="EPMDemoModel.FK_VipPermission_Employee" FromRole="VipPermission" ToRole="Employee" />
-          <NavigationProperty Name="Permission" Relationship="EPMDemoModel.FK_VipPermission_Permission" FromRole="VipPermission" ToRole="Permission" />
-        </EntityType>
-        <Association Name="FK_employeeRoleRelationship_Employee">
-          <End Type="EPMDemoModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="EPMDemoModel.employeeRoleRelationship" Role="employeeRoleRelationship" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="employeeID" />
-            </Principal>
-            <Dependent Role="employeeRoleRelationship">
-              <PropertyRef Name="employeeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VipPermission_Employee">
-          <End Type="EPMDemoModel.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="EPMDemoModel.VipPermission" Role="VipPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="employeeID" />
-            </Principal>
-            <Dependent Role="VipPermission">
-              <PropertyRef Name="userID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_employeeRoleRelationship_Role">
-          <End Type="EPMDemoModel.Role" Role="Role" Multiplicity="1" />
-          <End Type="EPMDemoModel.employeeRoleRelationship" Role="employeeRoleRelationship" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="roleID" />
-            </Principal>
-            <Dependent Role="employeeRoleRelationship">
-              <PropertyRef Name="RoleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RolePermissionRelationship_Permission">
-          <End Type="EPMDemoModel.Permission" Role="Permission" Multiplicity="1" />
-          <End Type="EPMDemoModel.RolePermissionRelationship" Role="RolePermissionRelationship" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Permission">
-              <PropertyRef Name="permissionID" />
-            </Principal>
-            <Dependent Role="RolePermissionRelationship">
-              <PropertyRef Name="permissionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VipPermission_Permission">
-          <End Type="EPMDemoModel.Permission" Role="Permission" Multiplicity="1" />
-          <End Type="EPMDemoModel.VipPermission" Role="VipPermission" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Permission">
-              <PropertyRef Name="permissionID" />
-            </Principal>
-            <Dependent Role="VipPermission">
-              <PropertyRef Name="permissionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_RolePermissionRelationship_Role">
-          <End Type="EPMDemoModel.Role" Role="Role" Multiplicity="1" />
-          <End Type="EPMDemoModel.RolePermissionRelationship" Role="RolePermissionRelationship" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Role">
-              <PropertyRef Name="roleID" />
-            </Principal>
-            <Dependent Role="RolePermissionRelationship">
-              <PropertyRef Name="roleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EPMDemoModelStoreContainer" CdmEntityContainer="EPMDemoEntities">
+        <EntityContainerMapping StorageEntityContainer="Simon8029CRMDemoModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="departmentRemark" ColumnName="departmentRemark" />
+                <ScalarProperty Name="departmentIsDeleted" ColumnName="departmentIsDeleted" />
+                <ScalarProperty Name="departmentAddTime" ColumnName="departmentAddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EM_CampaignInstances">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_CampaignInstances">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_CampaignInstances">
               <MappingFragment StoreEntitySet="EM_CampaignInstances">
                 <ScalarProperty Name="CampaignInstanceID" ColumnName="CampaignInstanceID" />
                 <ScalarProperty Name="EmailInstanceID" ColumnName="EmailInstanceID" />
@@ -830,7 +848,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_Campaigns">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_Campaigns">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_Campaigns">
               <MappingFragment StoreEntitySet="EM_Campaigns">
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
@@ -852,7 +870,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_EmailInstances">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_EmailInstances">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_EmailInstances">
               <MappingFragment StoreEntitySet="EM_EmailInstances">
                 <ScalarProperty Name="EmailInstanceID" ColumnName="EmailInstanceID" />
                 <ScalarProperty Name="CampaignID" ColumnName="CampaignID" />
@@ -872,7 +890,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_EmailTemplates">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_EmailTemplates">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_EmailTemplates">
               <MappingFragment StoreEntitySet="EM_EmailTemplates">
                 <ScalarProperty Name="EmailTemplateID" ColumnName="EmailTemplateID" />
                 <ScalarProperty Name="EmailTemplateTypeID" ColumnName="EmailTemplateTypeID" />
@@ -888,7 +906,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_EmailTemplateTypes">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_EmailTemplateTypes">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_EmailTemplateTypes">
               <MappingFragment StoreEntitySet="EM_EmailTemplateTypes">
                 <ScalarProperty Name="EmailTemplateTypeID" ColumnName="EmailTemplateTypeID" />
                 <ScalarProperty Name="EmailTemplateType" ColumnName="EmailTemplateType" />
@@ -896,7 +914,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_Events">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_Events">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_Events">
               <MappingFragment StoreEntitySet="EM_Events">
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
@@ -905,7 +923,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EM_Leads">
-            <EntityTypeMapping TypeName="EPMDemoModel.EM_Leads">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.EM_Leads">
               <MappingFragment StoreEntitySet="EM_Leads">
                 <ScalarProperty Name="LeadID" ColumnName="LeadID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -916,93 +934,83 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Department">
-            <EntityTypeMapping TypeName="EPMDemoModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="departmentAddTime" ColumnName="departmentAddTime" />
-                <ScalarProperty Name="departmentIsDeleted" ColumnName="departmentIsDeleted" />
-                <ScalarProperty Name="departmentRemark" ColumnName="departmentRemark" />
-                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
-                <ScalarProperty Name="departmentID" ColumnName="departmentID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employee">
-            <EntityTypeMapping TypeName="EPMDemoModel.Employee">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="employeeAddTime" ColumnName="employeeAddTime" />
-                <ScalarProperty Name="employeeIsDeleted" ColumnName="employeeIsDeleted" />
-                <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
-                <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
-                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
-                <ScalarProperty Name="employeeLoginPassword" ColumnName="employeeLoginPassword" />
-                <ScalarProperty Name="employeeLoginName" ColumnName="employeeLoginName" />
-                <ScalarProperty Name="employeeCnName" ColumnName="employeeCnName" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
                 <ScalarProperty Name="employeeDepartmentID" ColumnName="employeeDepartmentID" />
-                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="employeeCnName" ColumnName="employeeCnName" />
+                <ScalarProperty Name="employeeLoginName" ColumnName="employeeLoginName" />
+                <ScalarProperty Name="employeeLoginPassword" ColumnName="employeeLoginPassword" />
+                <ScalarProperty Name="employeeGender" ColumnName="employeeGender" />
+                <ScalarProperty Name="employeePhone" ColumnName="employeePhone" />
+                <ScalarProperty Name="employeeAddress" ColumnName="employeeAddress" />
+                <ScalarProperty Name="employeeIsDeleted" ColumnName="employeeIsDeleted" />
+                <ScalarProperty Name="employeeAddTime" ColumnName="employeeAddTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="employeeRoleRelationship">
-            <EntityTypeMapping TypeName="EPMDemoModel.employeeRoleRelationship">
+          <EntitySetMapping Name="employeeRoleRelationships">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.employeeRoleRelationship">
               <MappingFragment StoreEntitySet="employeeRoleRelationship">
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
-                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
                 <ScalarProperty Name="employeeRoleRelationID" ColumnName="employeeRoleRelationID" />
+                <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Permission">
-            <EntityTypeMapping TypeName="EPMDemoModel.Permission">
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.Permission">
               <MappingFragment StoreEntitySet="Permission">
-                <ScalarProperty Name="permissionAddTime" ColumnName="permissionAddTime" />
-                <ScalarProperty Name="permissionIsDeleted" ColumnName="permissionIsDeleted" />
-                <ScalarProperty Name="permissionIsShow" ColumnName="permissionIsShow" />
-                <ScalarProperty Name="permissionOrder" ColumnName="permissionOrder" />
-                <ScalarProperty Name="permissionIsLink" ColumnName="permissionIsLink" />
-                <ScalarProperty Name="permissionIcon" ColumnName="permissionIcon" />
-                <ScalarProperty Name="permissionJSMethodName" ColumnName="permissionJSMethodName" />
-                <ScalarProperty Name="permissionOperationType" ColumnName="permissionOperationType" />
-                <ScalarProperty Name="permissionFormMethod" ColumnName="permissionFormMethod" />
-                <ScalarProperty Name="permissionActionName" ColumnName="permissionActionName" />
-                <ScalarProperty Name="permissionControllerName" ColumnName="permissionControllerName" />
-                <ScalarProperty Name="permissionAreaName" ColumnName="permissionAreaName" />
-                <ScalarProperty Name="permissionRemark" ColumnName="permissionRemark" />
-                <ScalarProperty Name="permissionName" ColumnName="permissionName" />
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
                 <ScalarProperty Name="permissionParentID" ColumnName="permissionParentID" />
-                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+                <ScalarProperty Name="permissionName" ColumnName="permissionName" />
+                <ScalarProperty Name="permissionRemark" ColumnName="permissionRemark" />
+                <ScalarProperty Name="permissionAreaName" ColumnName="permissionAreaName" />
+                <ScalarProperty Name="permissionControllerName" ColumnName="permissionControllerName" />
+                <ScalarProperty Name="permissionActionName" ColumnName="permissionActionName" />
+                <ScalarProperty Name="permissionFormMethod" ColumnName="permissionFormMethod" />
+                <ScalarProperty Name="permissionOperationType" ColumnName="permissionOperationType" />
+                <ScalarProperty Name="permissionJSMethodName" ColumnName="permissionJSMethodName" />
+                <ScalarProperty Name="permissionIcon" ColumnName="permissionIcon" />
+                <ScalarProperty Name="permissionIsLink" ColumnName="permissionIsLink" />
+                <ScalarProperty Name="permissionOrder" ColumnName="permissionOrder" />
+                <ScalarProperty Name="permissionIsShow" ColumnName="permissionIsShow" />
+                <ScalarProperty Name="permissionIsDeleted" ColumnName="permissionIsDeleted" />
+                <ScalarProperty Name="permissionAddTime" ColumnName="permissionAddTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="EPMDemoModel.Role">
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="roleAddTime" ColumnName="roleAddTime" />
-                <ScalarProperty Name="roleIsDeleted" ColumnName="roleIsDeleted" />
-                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
                 <ScalarProperty Name="roleDepartmentID" ColumnName="roleDepartmentID" />
-                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="roleIsDeleted" ColumnName="roleIsDeleted" />
+                <ScalarProperty Name="roleAddTime" ColumnName="roleAddTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RolePermissionRelationship">
-            <EntityTypeMapping TypeName="EPMDemoModel.RolePermissionRelationship">
+          <EntitySetMapping Name="RolePermissionRelationships">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.RolePermissionRelationship">
               <MappingFragment StoreEntitySet="RolePermissionRelationship">
-                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
-                <ScalarProperty Name="roleID" ColumnName="roleID" />
                 <ScalarProperty Name="rolePermissionRelationID" ColumnName="rolePermissionRelationID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VipPermission">
-            <EntityTypeMapping TypeName="EPMDemoModel.VipPermission">
-              <MappingFragment StoreEntitySet="VipPermission">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
                 <ScalarProperty Name="permissionID" ColumnName="permissionID" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="vipPermissionID" ColumnName="vipPermissionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VipPermissions">
+            <EntityTypeMapping TypeName="Simon8029CRMDemoModel.VipPermission">
+              <MappingFragment StoreEntitySet="VipPermission">
+                <ScalarProperty Name="vipPermissionID" ColumnName="vipPermissionID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="permissionID" ColumnName="permissionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EM_CampaignInstances_INSERT" FunctionName="Simon8029CRMDemoModel.Store.EM_CampaignInstances_INSERT" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1017,7 +1025,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="true" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

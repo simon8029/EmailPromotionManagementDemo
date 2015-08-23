@@ -18,12 +18,12 @@ namespace Simon8029.EMPDemo.Model.ModelsForEasyUI
 
     public enum AjaxMessageStatus
     {
-        LoginSuccess,
-        LoginFailed,
-        NotLogin,
-        NoPermission,
-        OperationSuccess,
-        OperationFailed,
-        OtherError
+        LoginSuccess=1,
+        LoginFailed=2,
+        NotLogin=3,
+        NoPermission=4,
+        OperationSuccess=5,
+        OperationFailed=6,
+        OtherError=7
     }
 }

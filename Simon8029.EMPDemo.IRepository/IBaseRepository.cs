@@ -19,6 +19,15 @@ namespace Simon8029.EMPDemo.IRepository
         IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression);
 
         /// <summary>
+        /// 根据条件查询 并且 排序
+        /// </summary>
+        /// <typeparam name="TKey">排序字段类型（可以不写，通过编译器类型推断出来）</typeparam>
+        /// <param name="where">查询条件</param>
+        /// <param name="orderBy">第一个排序条件</param>
+        /// <returns></returns>
+        IQueryable<TEntity> Get<TKey>(Expression<Func<TEntity, bool>> where, Expression<Func<TEntity, TKey>> orderBy, bool isAsc = true);
+
+        /// <summary>
         /// 修改指定实体的指定属性
         /// </summary>
         /// <param name="entity">待修改的实体对象</param>

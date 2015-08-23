@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        .tbList {
+            border: 1px solid #ddd;
+            width: 99.5%;
+            height: 99.5%;
+            border-collapse: collapse;
+        }
+
+            .tbList td, .tbList th {
+                border: 1px solid #ddd;
+                padding: 5px;
+            }
+    </style>
+    <link href="~/Content/easyUIThemes/icon.css" rel="stylesheet" />
+    <link href="~/Content/easyUIThemes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+    <script src="~/Scripts/jquery.easyui-messageProcess.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.easyui-globalHelper.js"></script>
+
+    @RenderSection("headSection", required: false)
+</head>
+<body>
+    @RenderBody()
+</body>
+</html>

@@ -16,28 +16,28 @@ namespace Simon8029.EMPDemo.Model
     {
         public Permission()
         {
-            this.RolePermissionRelationship = new HashSet<RolePermissionRelationship>();
-            this.VipPermission = new HashSet<VipPermission>();
-        } 
+            this.RolePermissionRelationships = new HashSet<RolePermissionRelationship>();
+            this.VipPermissions = new HashSet<VipPermission>();
+        }
     
         public int permissionID { get; set; }
         public int permissionParentID { get; set; }
         public string permissionName { get; set; }
-        public byte[] permissionRemark { get; set; }
+        public string permissionRemark { get; set; }
         public string permissionAreaName { get; set; }
         public string permissionControllerName { get; set; }
         public string permissionActionName { get; set; }
         public short permissionFormMethod { get; set; }
         public short permissionOperationType { get; set; }
-        public byte[] permissionJSMethodName { get; set; }
+        public string permissionJSMethodName { get; set; }
         public string permissionIcon { get; set; }
         public bool permissionIsLink { get; set; }
         public int permissionOrder { get; set; }
         public bool permissionIsShow { get; set; }
-        public long permissionIsDeleted { get; set; }
+        public bool permissionIsDeleted { get; set; }
         public System.DateTime permissionAddTime { get; set; }
     
-        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationship { get; set; }
-        public virtual ICollection<VipPermission> VipPermission { get; set; }
+        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationships { get; set; }
+        public virtual ICollection<VipPermission> VipPermissions { get; set; }
     }
 }

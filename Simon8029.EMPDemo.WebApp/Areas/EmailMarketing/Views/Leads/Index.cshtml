@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/easyUIThemes/icon.css" rel="stylesheet" />
+    <link href="~/Content/easyUIThemes/bootstrap/easyui.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("emailmarketing/leads/index", [@Html.GetButtonsForToolbar()], [[
+                { field: 'LeadID', title: 'LeadID', width: 10 },
+                    { field: 'FirstName', title: 'FirstName', width: 10 },
+                    { field: 'LastName', title: 'LastName', width: 10 },
+                    { field: 'EmailAddress', title: 'EmailAddress', width: 10 },
+                    { field: 'IsValid', title: 'IsValid', width: 10 },
+                    { field: 'Unsubscribed', title: 'Unsubscribed', width: 10 }
+            ]])
+        });
+        function loadData(pars) {
+            $('#dg').datagrid({
+                url: '/EmailMarketing/Leads/Index',
+                title: 'Leads Management',
+                fitColumns: true,
+                idField: 'ID',
+                loadMsg: "loading...",
+                pagination: true,
+                singleSelect: false,
+                pagesize: 10,
+                pageNumber: 1,
+                pageList: [10, 20, 30],
+                queryParams: pars,
+                columns: [[
+                    { field: 'LeadID', title: 'LeadID', width: 10 },
+                    { field: 'FirstName', title: 'FirstName', width: 10 },
+                    { field: 'LastName', title: 'LastName', width: 10 },
+                    { field: 'EmailAddress', title: 'EmailAddress', width: 10 },
+                    { field: 'IsValid', title: 'IsValid', width: 10 },
+                    { field: 'Unsubscribed', title: 'Unsubscribed', width: 10 }
+                ]]
+            });
+        };
+    </script>
+</head>
+<body>
+        <div>
+            <table id="dg"></table>
+        </div>
+    </body>
+
+
+</html>

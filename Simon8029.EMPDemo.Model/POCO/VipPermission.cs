@@ -13,9 +13,9 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public VipPermission ToPOCO(){
 			return new VipPermission(){
-			vipPermissionID=this.vipPermissionID,
-			userID=this.userID,
-			permissionID=this.permissionID,
+								vipPermissionID=this.vipPermissionID,
+				userID=this.userID,
+				permissionID=this.permissionID,
 			};
 		}
 	}

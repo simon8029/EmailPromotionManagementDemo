@@ -17,7 +17,7 @@ namespace Simon8029.EMPDemo.Model
         public EM_EmailInstances()
         {
             this.EM_CampaignInstances = new HashSet<EM_CampaignInstances>();
-        } 
+        }
     
         public int EmailInstanceID { get; set; }
         public Nullable<int> CampaignID { get; set; }

@@ -38,10 +38,12 @@ namespace Simon8029.EMPDemo.Model
 #>
 		public <#=entity.Name#> ToPOCO(){
 			return new <#=entity.Name#>(){
-<#
-				foreach (var edmProperty in simpleProperties){
-#>
-			<#= edmProperty.Name #>=this.<#= edmProperty.Name #>,
+				<#
+				//循环属性，生成 代码
+				foreach (var edmProperty in simpleProperties)
+				{
+				#>
+				<#= edmProperty.Name #>=this.<#= edmProperty.Name #>,
 <#
 				}
 #>
