@@ -28,7 +28,7 @@ namespace Simon8029.EMPDemo.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<Department> Department { get; set; }
         public DbSet<EM_CampaignInstances> EM_CampaignInstances { get; set; }
         public DbSet<EM_Campaigns> EM_Campaigns { get; set; }
         public DbSet<EM_EmailInstances> EM_EmailInstances { get; set; }
@@ -36,12 +36,12 @@ namespace Simon8029.EMPDemo.Model
         public DbSet<EM_EmailTemplateTypes> EM_EmailTemplateTypes { get; set; }
         public DbSet<EM_Events> EM_Events { get; set; }
         public DbSet<EM_Leads> EM_Leads { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<employeeRoleRelationship> employeeRoleRelationships { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<RolePermissionRelationship> RolePermissionRelationships { get; set; }
-        public DbSet<VipPermission> VipPermissions { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<employeeRoleRelationship> employeeRoleRelationship { get; set; }
+        public DbSet<Permission> Permission { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<RolePermissionRelationship> RolePermissionRelationship { get; set; }
+        public DbSet<VipPermission> VipPermission { get; set; }
     
         public virtual int EM_CampaignInstances_INSERT(Nullable<int> emailInstanceID)
         {

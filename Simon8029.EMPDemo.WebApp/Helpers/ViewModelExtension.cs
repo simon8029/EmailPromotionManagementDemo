@@ -6,7 +6,7 @@ using Simon8029.EMPDemo.WebApp.Areas.Admin.Models;
 
 namespace Simon8029.EMPDemo.WebApp.Helpers
 {
-    public static class ModelExtension
+    public static class ViewModelExtension
     {
         /// <summary>
         /// 将 权限实体 对象 转成 权限视图模型 对象
@@ -33,6 +33,17 @@ namespace Simon8029.EMPDemo.WebApp.Helpers
                 PermissionIsLink = permissionPOCO.permissionIsLink,
                 PermissionOrder = permissionPOCO.permissionOrder,
                 PermissionIsShow = permissionPOCO.permissionIsShow
+            };
+        }
+
+        public static RoleViewModel ToViewModel(this Model.Role rolePOCO)
+        {
+            var roleViewModel = new RoleViewModel();
+
+            return new RoleViewModel()
+            {
+                roleID = rolePOCO.roleID,
+                roleName = rolePOCO.roleName,
             };
         }
     }

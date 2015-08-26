@@ -1,37 +1,36 @@
-﻿
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @section headSection{
     <style type="text/css">
     </style>
-    <script src="~/Scripts/jquery.globalHelper.js"></script>
     <script type="text/javascript">
         $(function () {
-            $.globalHelper.datagridPara.init("", "", [[
+            $.globalHelper.datagridPara.init("/admin/permission/Index/1", [@Html.GetButtonsForToolbar()], [[
+                
+                { field: 'permissionName', title: 'Permission Name', width: 100 },
+                { field: 'permissionAreaName', title: 'Area Name', width: 100 },
+                { field: 'permissionControllerName', title: 'Controller Name', width: 100 },
+                { field: 'permissionActionName', title: 'Action Name', width: 100 },
                 {
-                    field: 'perIsShow', title: '是菜单', width: 20, formatter: function (colData) {
-                        return colData ? "√" : "X";
-                    }
-                },
-                { field: 'perName', title: '权限名称', width: 100 },
-                { field: 'perAreaName', title: '区域名称', width: 100 },
-                { field: 'perControllerName', title: '控制器名称', width: 100 },
-                { field: 'perActionName', title: 'Action名称', width: 100 },
-                {
-                    field: 'perFormMethod', title: '请求方式', width: 50, formatter: function (colData) {
+                    field: 'permissionFormMethod', title: 'Request Method', width: 50, formatter: function (colData) {
                         switch (colData) {
                             case 1:
                                 return "GET";
                             case 2:
                                 return "POST";
                             case 3:
-                                return "BOTH";
+                                return "GET/POST";
                         }
                     }
                 },
                 {
-                    field: 'perOperationType', title: '操作类型', width: 50, formatter: function (colData) {
+                    field: 'permissionIsShow', title: 'Is Menu Tree Node', width: 40, formatter: function (colData) {
+                        return colData ? "√" : "X";
+                    }
+                },
+                {
+                    field: 'permissionOperationType', title: 'Operation Type', width: 50, formatter: function (colData) {
                         switch (colData) {
                             case 1:
                                 return "MENU";
@@ -42,7 +41,7 @@
                         }
                     }
                 },
-                { field: 'perOrder', title: '排序', width: 50 }
+                { field: 'permissionOrder', title: 'Order Number', width: 50 }
             ]]);
 
             $("#tbList").datagrid($.globalHelper.datagridPara.paras);
@@ -52,19 +51,18 @@
         @if (Html.IsButtonExist("add"))
         {
             <text>
-    function add()
-    {
-        $.globalHelper.showCommonWindow("新增权限","/admin/permission/add",450,560);
+    function add() {
+        $.globalHelper.showCommonWindow("Add new permission", "/admin/permission/add", 450, 560);
     }
     </text>
         }
     @if (Html.IsButtonExist("viewSons"))
         {
-            <text>
+    <text>
     function viewSons()//查看子权限
     {
         ifSelected(function (perData) {
-            $.globalHelper.showCommonWindow("查看【" + perData.perName + "】子权限列表", "/admin/permission/SonIndex/" + perData.perId);
+            $.globalHelper.showCommonWindow("Display '" + perData.permissionName + "'s sub-permission", "/admin/permission/ChildIndex/" + perData.permissionID);
         })
     }
     </text>
@@ -72,35 +70,32 @@
     @if (Html.IsButtonExist("remove"))
         {
             <text>
-    function remove()
-    {
+    function remove() {
     }
     </text>
         }
     @if (Html.IsButtonExist("modify"))
         {
-            <text>
-    function modify()
-    {
+    <text>
+    function modify() {
         ifSelected(function (selectedRowData) {
-            $.globalHelper.showCommonWindow("修改【" + selectedRowData.perName + "】权限", "/admin/permission/modify/" + selectedRowData.perId, 450, 560);
+            $.globalHelper.showCommonWindow("Modify [" + selectedRowData.permissionName + "]", "/admin/permission/modify/" + selectedRowData.permissionID, 450, 560);
         })
     }
     </text>
         }
 
     //统一判断 是否有选中行，如果有，则调用回到函数（func），并传入 选中行的数据
-    function ifSelected(func)
-    {
+    function ifSelected(func) {
         //获取选中行的数据
         var selectedRowData = $("#tbList").datagrid("getSelected");
         if (selectedRowData) {
-            if (func && func instanceof Function)
-            {
+            if (func && func instanceof Function) {
                 func(selectedRowData);//调用回调函数，并传入 选中行的数据
             }
         } else {
-            $.msgBoxObj.showInfo("请选中要操作的行 ~~~");
+            $.messager.alert("Alert","Please select the row to be modified.");
+            //$.msgBoxObj.showInfo("请选中要操作的行 ~~~");
         }
     }
     </script>

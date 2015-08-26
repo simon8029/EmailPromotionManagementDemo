@@ -13,6 +13,17 @@ namespace Simon8029.EMPDemo.Repository
     using Simon8029.EMPDemo.IRepository;
     public partial class DbSession:IRepository.IDbSession
     {
+    	IRepository.IDepartmentRepository _DepartmentRepository;
+        public IRepository.IDepartmentRepository DepartmentRepository 
+        { 
+        	get
+        	{
+                if (_DepartmentRepository == null)
+                    _DepartmentRepository = new DepartmentRepository();
+                return _DepartmentRepository;
+        	}
+        }
+    
     	IRepository.IEM_CampaignInstancesRepository _EM_CampaignInstancesRepository;
         public IRepository.IEM_CampaignInstancesRepository EM_CampaignInstancesRepository 
         { 
@@ -87,17 +98,6 @@ namespace Simon8029.EMPDemo.Repository
                 if (_EM_LeadsRepository == null)
                     _EM_LeadsRepository = new EM_LeadsRepository();
                 return _EM_LeadsRepository;
-        	}
-        }
-    
-    	IRepository.IDepartmentRepository _DepartmentRepository;
-        public IRepository.IDepartmentRepository DepartmentRepository 
-        { 
-        	get
-        	{
-                if (_DepartmentRepository == null)
-                    _DepartmentRepository = new DepartmentRepository();
-                return _DepartmentRepository;
         	}
         }
     

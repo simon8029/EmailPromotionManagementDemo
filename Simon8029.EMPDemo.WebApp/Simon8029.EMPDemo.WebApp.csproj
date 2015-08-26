@@ -114,9 +114,12 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\PermissionController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\LoginWindowViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PermissionViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\SetRolePermissionViewModel.cs" />
     <Compile Include="Areas\EmailMarketing\Controllers\LeadsController.cs" />
     <Compile Include="Areas\EmailMarketing\EmailMarketingAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -128,7 +131,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EnumHelper.cs" />
-    <Compile Include="Helpers\ModelExtension.cs" />
+    <Compile Include="Helpers\ViewModelExtension.cs" />
     <Compile Include="OperationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VCode.ashx.cs">
@@ -402,6 +405,10 @@
     <Content Include="Areas\Admin\Views\Permission\ChildIndex.cshtml" />
     <Content Include="Areas\Admin\Views\Permission\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Permission\Modify.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\SetRolePermission.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Modify.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -477,6 +484,9 @@
       <Project>{f116b6d4-3ff0-499e-a88a-c6ed8cf2e0a0}</Project>
       <Name>Simon8029.EMPDemo.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

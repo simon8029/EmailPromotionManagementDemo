@@ -16,7 +16,7 @@ namespace Simon8029.EMPDemo.Model
     {
         public Department()
         {
-            this.Employees = new HashSet<Employee>();
+            this.Employee = new HashSet<Employee>();
         }
     
         public int departmentID { get; set; }
@@ -25,6 +25,6 @@ namespace Simon8029.EMPDemo.Model
         public bool departmentIsDeleted { get; set; }
         public System.DateTime departmentAddTime { get; set; }
     
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Employee> Employee { get; set; }
     }
 }

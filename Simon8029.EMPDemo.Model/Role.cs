@@ -16,17 +16,16 @@ namespace Simon8029.EMPDemo.Model
     {
         public Role()
         {
-            this.employeeRoleRelationships = new HashSet<employeeRoleRelationship>();
-            this.RolePermissionRelationships = new HashSet<RolePermissionRelationship>();
+            this.employeeRoleRelationship = new HashSet<employeeRoleRelationship>();
+            this.RolePermissionRelationship = new HashSet<RolePermissionRelationship>();
         }
     
         public int roleID { get; set; }
-        public Nullable<int> roleDepartmentID { get; set; }
         public string roleName { get; set; }
         public bool roleIsDeleted { get; set; }
         public System.DateTime roleAddTime { get; set; }
     
-        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationships { get; set; }
-        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationships { get; set; }
+        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationship { get; set; }
+        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationship { get; set; }
     }
 }

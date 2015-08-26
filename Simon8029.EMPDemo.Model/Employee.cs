@@ -16,8 +16,8 @@ namespace Simon8029.EMPDemo.Model
     {
         public Employee()
         {
-            this.employeeRoleRelationships = new HashSet<employeeRoleRelationship>();
-            this.VipPermissions = new HashSet<VipPermission>();
+            this.employeeRoleRelationship = new HashSet<employeeRoleRelationship>();
+            this.VipPermission = new HashSet<VipPermission>();
         }
     
         public int employeeID { get; set; }
@@ -32,7 +32,7 @@ namespace Simon8029.EMPDemo.Model
         public System.DateTime employeeAddTime { get; set; }
     
         public virtual Department Department { get; set; }
-        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationships { get; set; }
-        public virtual ICollection<VipPermission> VipPermissions { get; set; }
+        public virtual ICollection<employeeRoleRelationship> employeeRoleRelationship { get; set; }
+        public virtual ICollection<VipPermission> VipPermission { get; set; }
     }
 }

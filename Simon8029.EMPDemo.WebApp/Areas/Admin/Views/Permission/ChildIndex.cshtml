@@ -1,17 +1,93 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+@section headSection{
+    <style type="text/css">
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("/admin/permission/Index/@ViewBag.pid", [@Html.GetButtonsForToolbar()], [[
 
-<!DOCTYPE html>
+                { field: 'permissionName', title: 'Permission Name', width: 100 },
+                { field: 'permissionAreaName', title: 'Area Name', width: 100 },
+                { field: 'permissionControllerName', title: 'Controller Name', width: 100 },
+                { field: 'permissionActionName', title: 'Action Name', width: 100 },
+                {
+                    field: 'permissionFormMethod', title: 'Request Method', width: 50, formatter: function (colData) {
+                        switch (colData) {
+                            case 1:
+                                return "GET";
+                            case 2:
+                                return "POST";
+                            case 3:
+                                return "GET/POST";
+                        }
+                    }
+                },
+                {
+                    field: 'permissionIsShow', title: 'Is Menu Tree Node', width: 40, formatter: function (colData) {
+                        return colData ? "√" : "X";
+                    }
+                },
+                {
+                    field: 'permissionOperationType', title: 'Operation Type', width: 50, formatter: function (colData) {
+                        switch (colData) {
+                            case 1:
+                                return "MENU";
+                            case 2:
+                                return "BUTTON";
+                            case 3:
+                                return "AJAX";
+                        }
+                    }
+                },
+                { field: 'permissionOrder', title: 'Order Number', width: 50 }
+            ]]);
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ChildIndex</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>
+            $("#tbList").datagrid($.globalHelper.datagridPara.paras);
+        });
+
+        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
+        @if (Html.IsButtonExist("add"))
+        {
+            <text>
+        function add() {
+            $.globalHelper.showCommonWindow("Add new permission", "/admin/permission/add", 450, 560);
+        }
+        </text>
+        }
+        
+        @if (Html.IsButtonExist("remove"))
+        {
+            <text>
+        function remove() {
+        }
+        </text>
+        }
+        @if (Html.IsButtonExist("modify"))
+        {
+    <text>
+        function modify() {
+            ifSelected(function (selectedRowData) {
+                $.globalHelper.showCommonWindow("Modify [" + selectedRowData.permissionName + "]", "/admin/permission/modify/" + selectedRowData.permissionID, 450, 560);
+            })
+        }
+        </text>
+        }
+
+        //统一判断 是否有选中行，如果有，则调用回到函数（func），并传入 选中行的数据
+        function ifSelected(func) {
+            //获取选中行的数据
+            var selectedRowData = $("#tbList").datagrid("getSelected");
+            if (selectedRowData) {
+                if (func && func instanceof Function) {
+                    func(selectedRowData);//调用回调函数，并传入 选中行的数据
+                }
+            } else {
+                $.messager.alert("Alert", "Please select the row to be modified.");
+                //$.msgBoxObj.showInfo("请选中要操作的行 ~~~");
+            }
+        }
+    </script>
+}
+<table id="tbList"></table>

@@ -13,7 +13,7 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_EmailTemplates ToPOCO(){
 			return new EM_EmailTemplates(){
-								EmailTemplateID=this.EmailTemplateID,
+				EmailTemplateID=this.EmailTemplateID,
 				EmailTemplateTypeID=this.EmailTemplateTypeID,
 				TemplateTypeID=this.TemplateTypeID,
 				Template=this.Template,

@@ -74,7 +74,7 @@ namespace Simon8029.EMPDemo.WebApp
 
         public bool HasPermission(string AreaName, string ControllerName, string ActionName, string FormMethod)
         {
-            var hasPermission =GetUserPermission(AreaName, ControllerName, ActionName, FormMethod) != null;
+            var hasPermission = GetUserPermission(AreaName, ControllerName, ActionName, FormMethod) != null;
             return hasPermission;
         }
 
@@ -82,11 +82,13 @@ namespace Simon8029.EMPDemo.WebApp
         {
             int intFormMethod = formMethod.ToLower() == "get" ? 1 : 2;
             var currentUserPermission = CurrentUserPermissions.SingleOrDefault(
-                (p => p.permissionAreaName.ToLower() == areaName.ToLower()
-                    && p.permissionControllerName.ToLower() == controllerName.ToLower()
-                    && p.permissionActionName.ToLower() == actionName.ToLower()
+                (p => p.permissionAreaName.ToLower().Trim() == areaName.ToLower().Trim()
+                    && p.permissionControllerName.ToLower().Trim() == controllerName.ToLower().Trim()
+                    && p.permissionActionName.ToLower().Trim() == actionName.ToLower().Trim()
                     && (p.permissionFormMethod == 3 || (p.permissionFormMethod == intFormMethod))));
+
             return currentUserPermission;
+
         }
 
 

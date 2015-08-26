@@ -13,7 +13,7 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_EmailInstances ToPOCO(){
 			return new EM_EmailInstances(){
-								EmailInstanceID=this.EmailInstanceID,
+				EmailInstanceID=this.EmailInstanceID,
 				CampaignID=this.CampaignID,
 				SubjectLine=this.SubjectLine,
 				EmailBody=this.EmailBody,

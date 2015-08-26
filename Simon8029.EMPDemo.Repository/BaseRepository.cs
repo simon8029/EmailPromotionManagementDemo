@@ -114,6 +114,31 @@ namespace Simon8029.EMPDemo.Repository
             return pageData;
         }
 
+        public EasyUIModel_PageData<TEntity> GetWithPaginationAndNavigationProperty<TKey>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression, bool isAsc = true, params string[] navigationPropertyName)
+        {
+            //dbSet.Include("导航属性名1").Include("导航属性名2").Include("导航属性名3").Where(where).OrderBy(orderBy).Skip(0).Take(10);
+            //dbSet.Where(where).OrderBy(orderBy).Skip(0).Take(10);
+            DbQuery<TEntity> dbQuery = _dbSet;
+            //循环 加入 要连接查询的 导航属性名称
+            foreach (string includeN in navigationPropertyName)
+            {
+                dbQuery = dbQuery.Include(includeN);
+            }
+
+            var dbSetWhered = dbQuery.Where(whereExpression);
+            IOrderedQueryable<TEntity> orderWhere = null;
+            if (isAsc)
+                orderWhere = dbSetWhered.OrderBy(orderByExpression);
+            else
+                orderWhere = dbSetWhered.OrderByDescending(orderByExpression);
+
+            EasyUIModel_PageData<TEntity>  pageData = new EasyUIModel_PageData<TEntity>();
+            pageData.rows = orderWhere.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            pageData.total = dbSetWhered.Count();
+
+            return pageData;
+        }
 
         #region Validation Entity ID: public void ValidateEntityId(int entityId)
         public void ValidateEntityId(int entityId)

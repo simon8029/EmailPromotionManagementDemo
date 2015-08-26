@@ -13,7 +13,7 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public EM_Campaigns ToPOCO(){
 			return new EM_Campaigns(){
-								CampaignID=this.CampaignID,
+				CampaignID=this.CampaignID,
 				StartDate=this.StartDate,
 				EndDate=this.EndDate,
 				CampaignName=this.CampaignName,

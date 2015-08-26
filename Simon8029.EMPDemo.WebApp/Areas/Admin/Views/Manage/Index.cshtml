@@ -20,7 +20,7 @@
                 resizable: false,
                 width: 1200,
                 height: 550,
-                title: '公共窗体',
+                title: 'Common window',
                 closed: true
             }).children("iframe").load(function () { //找到公共个窗体里的 iframe ，为其onload事件注册方法，关闭 进度条
                 $.messager.progress("close");
@@ -78,7 +78,7 @@
         }
 
         function createContent(url) {
-            return "<iframe src='" + url + "' style='border:0px solid #000;width:100%;height:900px'></iframe>";
+            return "<iframe src='" + url + "' style='border:0px solid #000;width:100%;height:700px;'></iframe>";
         }
     </script>
 

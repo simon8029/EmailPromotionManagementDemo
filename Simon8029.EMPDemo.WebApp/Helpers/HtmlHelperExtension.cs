@@ -43,8 +43,8 @@ namespace Simon8029.EMPDemo.WebApp
         {
             var btns = htmlHelper.ViewBag.toolbarButtons;
             var buttons = (htmlHelper.ViewBag.toolbarButtons as List<Permission>).FirstOrDefault(o => o.permissionJSMethodName.IsSame(strJsMethodName));
-
-            return buttons != null;
+            var isButtonExist = buttons != null;
+            return isButtonExist;
         } 
         #endregion
     }

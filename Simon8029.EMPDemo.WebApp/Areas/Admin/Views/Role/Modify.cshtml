@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.Admin.Models.RoleViewModel
+
+
+@section headSection{
+    <style type="text/css">
+        #imgIco {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function begin() {
+            //$.msgBoxObj.showWait("Loading~~~：）");
+
+        }
+
+        function complete(xhrObj) {
+
+            $.messager.alert("Info", "Role Updated.", "info", function() {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+            })
+
+        };
+    </script>
+}
+
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.roleName)</td>
+            <td>@Html.TextBoxFor(o => o.roleName)</td>
+            <td>@Html.ValidationMessageFor(o => o.roleName)</td>
+        </tr>
+         <tr>
+            <td colspan="3">
+                <input type="submit" value="Update" />
+            </td>
+        </tr>
+    </table>
+}

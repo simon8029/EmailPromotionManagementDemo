@@ -13,8 +13,7 @@ namespace Simon8029.EMPDemo.Model
 	{
 		public Role ToPOCO(){
 			return new Role(){
-								roleID=this.roleID,
-				roleDepartmentID=this.roleDepartmentID,
+				roleID=this.roleID,
 				roleName=this.roleName,
 				roleIsDeleted=this.roleIsDeleted,
 				roleAddTime=this.roleAddTime,

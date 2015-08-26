@@ -135,7 +135,7 @@
     <Key>
       <PropertyRef Name="permissionID" />
     </Key>
-    <Property Name="permissionID" Type="int" Nullable="false" />
+    <Property Name="permissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="permissionParentID" Type="int" Nullable="false" />
     <Property Name="permissionName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="permissionRemark" Type="varchar" MaxLength="150" />
@@ -157,7 +157,6 @@
       <PropertyRef Name="roleID" />
     </Key>
     <Property Name="roleID" Type="int" Nullable="false" />
-    <Property Name="roleDepartmentID" Type="int" />
     <Property Name="roleName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="roleIsDeleted" Type="bit" Nullable="false" />
     <Property Name="roleAddTime" Type="datetime" Nullable="false" />
@@ -166,7 +165,7 @@
     <Key>
       <PropertyRef Name="rolePermissionRelationID" />
     </Key>
-    <Property Name="rolePermissionRelationID" Type="int" Nullable="false" />
+    <Property Name="rolePermissionRelationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="roleID" Type="int" Nullable="false" />
     <Property Name="permissionID" Type="int" Nullable="false" />
   </EntityType>

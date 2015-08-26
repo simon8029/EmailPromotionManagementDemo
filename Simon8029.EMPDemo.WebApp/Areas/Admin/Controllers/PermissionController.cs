@@ -24,10 +24,10 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
-        } 
+        }
         #endregion
 
-        #region 1.1 加载 子权限列表 视图 +SonIndex()
+        #region 1.1 加载 子权限列表 视图 +ChildIndex()
         /// <summary>
         /// 1.1 加载 子权限列表 视图
         /// </summary>
@@ -58,9 +58,9 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
             permissions.rows = permissions.rows.Select(o => o.ToPOCO()).ToList();
             //2.转成json格式字符串
             var jsSerializer = new JavaScriptSerializer();
-            var strJson =jsSerializer.Serialize(permissions);
+            var strJson = jsSerializer.Serialize(permissions);
             return Content(strJson);
-        } 
+        }
         #endregion
 
         #region 2.0 加载 新增 视图 + Add()
@@ -72,14 +72,14 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
         public ActionResult Add()
         {
             //1.准备 父权限 下拉框 o.perParent <= 1 &&
-            var parPers = OperationContext.ServiceSession.PermissionService.Get(o =>  o.permissionIsDeleted == false && o.permissionIsShow == true,o=>o.permissionOrder).ToList().Select(o => new SelectListItem()
+            var parPers = OperationContext.ServiceSession.PermissionService.Get(p => p.permissionIsDeleted == false && p.permissionIsShow == true  , p => p.permissionOrder).ToList().Select(p => new SelectListItem()
             {
-                Text = o.permissionParentID == 0 ? o.permissionName : "--" + o.permissionName,
-                Value = o.permissionID.ToString()
+                Text = p.permissionParentID == 0 ? p.permissionName : "--" + p.permissionName,
+                Value = p.permissionID.ToString()
             });
             ViewBag.parPers = parPers;
             return View();
-        } 
+        }
         #endregion
 
         #region 2.1 保存 新增 数据 +Add(ViewModel.Permission viewModel)
@@ -89,19 +89,19 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
         /// <param name="viewModel"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Add(Permission viewModel)
+        public ActionResult Add(PermissionViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
                 OperationContext.ServiceSession.PermissionService.Add(viewModel.ToPOCO());
                 OperationContext.ServiceSession.SaveChange();
-                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationSuccess, "","",null);
+                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationSuccess, "", "", null);
             }
             else
             {
-                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationFailed, "Please enable javascript in browser.","",null);
+                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationFailed, "Please enable javascript in browser.", "", null);
             }
-        } 
+        }
         #endregion
 
         #region 2.2 查找 父权限 下 子权限的 最大序号，然后+1 返回 +string LoadOrderNumber()
@@ -118,7 +118,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
             //1.1查询父权限
             var parentPermission = OperationContext.ServiceSession.PermissionService.Get(p => p.permissionID == permissionId).FirstOrDefault();
             //2.查询 父权限下的 最大序号子权限
-            var maxOrderChildPermission = OperationContext.ServiceSession.PermissionService.Get(o => o.permissionParentID == permissionId).OrderByDescending(o => o.permissionOrder).SingleOrDefault();
+            var maxOrderChildPermission = OperationContext.ServiceSession.PermissionService.Get(o => o.permissionParentID == permissionId).OrderByDescending(o => o.permissionOrder).FirstOrDefault();
 
             //序号增长量
             int seed = 1;
@@ -140,7 +140,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
             }
 
             return newOrderNo.ToString();
-        } 
+        }
         #endregion
 
         #region 3.0 加载 修改 视图 +Modify(int id)
@@ -154,7 +154,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
         {
             //1.查询要修改的 权限 实体对象
             var modifyData = OperationContext.ServiceSession.PermissionService.Get(o => o.permissionID == id).SingleOrDefault();
-            if (modifyData == null) { throw new Exception("找不到要修改的权限~~~~~~~！"); }
+            if (modifyData == null) { throw new Exception("Can not find the permission."); }
 
             //2.准备 父权限 下拉框
             var parPers = OperationContext.ServiceSession.PermissionService.Get(o => o.permissionParentID <= 1 && o.permissionIsDeleted == false && o.permissionIsShow == true, o => o.permissionOrder).ToList().Select(o => new SelectListItem()
@@ -166,7 +166,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
 
             //3.将 实体对象 转成 视图模型对象 传给 视图
             return View(modifyData.ToViewModel());
-        } 
+        }
         #endregion
 
         [HttpPost]
@@ -183,12 +183,12 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
                 //1.从url参数中 获取 要修改的 对象的 id
                 viewmodel.PermissionId = id;
                 //2.修改权限
-                OperationContext.ServiceSession.PermissionService.Update(viewmodel.ToPOCO(), "perParent", "perName", "perRemark", "perAreaName", "perControllerName", "perActionName", "perFormMethod", "perOperationType", "perJsMethodName", "perIco", "perIsLink", "perOrder", "perIsShow");
+                OperationContext.ServiceSession.PermissionService.Update(viewmodel.ToPOCO(), "permissionParentID", "permissionName", "permissionRemark", "permissionAreaName", "permissionControllerName", "permissionActionName", "permissionFormMethod", "permissionOperationType", "permissionJSMethodName", "permissionIcon", "permissionIsLink", "permissionOrder", "permissionIsShow");
                 OperationContext.ServiceSession.SaveChange();
-                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationSuccess, "","",null);
+                return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationSuccess, "", "", null);
             }
-            return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationFailed, "Please enable javascript in the browser","",null);
+            return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationFailed, "Please enable javascript in the browser", "", null);
         }
     }
-    
+
 }

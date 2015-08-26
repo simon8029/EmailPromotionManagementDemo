@@ -15,31 +15,31 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Models
     {
         public int PermissionId { get; set; }
 
-        [DisplayName("权限名称"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Permission Name"), Required]
         public string PermissionName { get; set; }
-        [DisplayName("父权限")]
+        [DisplayName("Parent Permission")]
         public int PermissionParentId { get; set; }
-        [DisplayName("备注"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Remark"), Required]
         public string PermissionReMark { get; set; }
-        [DisplayName("区域名"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Area Name"), Required]
         public string PermissionAreaName { get; set; }
-        [DisplayName("控制器名"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Controller Name"), Required]
         public string PermissionControllerName { get; set; }
-        [DisplayName("Action方法名"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Action Name"), Required]
         public string PermissionActionName { get; set; }
-        [DisplayName("请求方式")]
+        [DisplayName("Form Method")]
         public short PermissionFormMethod { get; set; }
-        [DisplayName("操作类型")]
+        [DisplayName("Operation Type")]
         public short PermissionOperationType { get; set; }
-        [DisplayName("按钮JS方法名")]
+        [DisplayName("JS Method Name")]
         public string PermissionJsMethodName { get; set; }
-        [DisplayName("是否为链接")]
+        [DisplayName("Is Link")]
         public bool PermissionIsLink { get; set; }
-        [DisplayName("是否显示")]
+        [DisplayName("Is Display")]
         public bool PermissionIsShow { get; set; }
-        [DisplayName("序号"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Order Number"), Required]
         public int PermissionOrder { get; set; }
-        [DisplayName("图标"), Required(ErrorMessage = "不能空")]
+        [DisplayName("Icon"), Required]
         public string PermissionIco { get; set; }
 
         /// <summary>

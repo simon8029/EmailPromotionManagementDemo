@@ -16,8 +16,8 @@ namespace Simon8029.EMPDemo.Model
     {
         public Permission()
         {
-            this.RolePermissionRelationships = new HashSet<RolePermissionRelationship>();
-            this.VipPermissions = new HashSet<VipPermission>();
+            this.RolePermissionRelationship = new HashSet<RolePermissionRelationship>();
+            this.VipPermission = new HashSet<VipPermission>();
         }
     
         public int permissionID { get; set; }
@@ -37,7 +37,7 @@ namespace Simon8029.EMPDemo.Model
         public bool permissionIsDeleted { get; set; }
         public System.DateTime permissionAddTime { get; set; }
     
-        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationships { get; set; }
-        public virtual ICollection<VipPermission> VipPermissions { get; set; }
+        public virtual ICollection<RolePermissionRelationship> RolePermissionRelationship { get; set; }
+        public virtual ICollection<VipPermission> VipPermission { get; set; }
     }
 }

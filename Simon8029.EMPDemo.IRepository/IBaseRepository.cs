@@ -63,5 +63,9 @@ namespace Simon8029.EMPDemo.IRepository
         EasyUIModel_PageData<TEntity> GetWithPagination<TKey>(int pageIndex, int pageSize,
             Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression,
             bool isAsc = true);
+
+        EasyUIModel_PageData<TEntity> GetWithPaginationAndNavigationProperty<TKey>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression,
+            bool isAsc = true, params string[] navigationPropertyName);
     }
 }

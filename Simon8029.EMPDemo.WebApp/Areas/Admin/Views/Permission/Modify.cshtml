@@ -1,17 +1,117 @@
-﻿
-@{
-    Layout = null;
+﻿@{
+    ViewBag.Title = "Modify permission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.Admin.Models.PermissionViewModel
+@section headSection{
+    <style type="text/css">
+        #imgIco {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $("#perIco").change(changeIcon);
+            $("#perIco").change();
+        })
+
+        function changeIcon() {
+            //把选中的 图标样式 设置给 演示的 div
+            document.getElementById("imgIco").className = this.value;
+            //$("#imgIco").class = this.value;
+        }
+
+        function begin() {
+            //$.msgBoxObj.showWait("请稍后~~~：）");
+        }
+        function complete(xhrObj) {
+           // $.msgBoxObj.hide();
+            //$.msgProcess(xhrObj.responseText, function () {
+            //    $.globalHelper.closeCommonWindow();//消息显示完毕后，关闭公共窗体
+            //    //刷新datagrid数据
+            //    $.globalHelper.reloadSeletecTabDataGrid();
+            //});
+
+            $.globalHelper.reloadSeletecTabDataGrid();
+            $.globalHelper.closeCommonWindow();
+        }
+    </script>
+}
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionName)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionName)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionParentId)</td>
+            <td>@Html.DropDownListFor(o => o.PermissionParentId, ViewBag.parPers as IEnumerable<SelectListItem>)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionParentId)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionAreaName)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionAreaName)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionAreaName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionControllerName)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionControllerName)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionControllerName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionActionName)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionActionName)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionActionName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionFormMethod)</td>
+            <td>@Html.DropDownListFor(o => o.PermissionFormMethod, Simon8029.EMPDemo.WebApp.Helpers.EnumHelper.FormMethod.DDLData)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionFormMethod)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionOperationType)</td>
+            <td>@Html.DropDownListFor(o => o.PermissionOperationType, Simon8029.EMPDemo.WebApp.Helpers.EnumHelper.OperationType.DDLData)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionOperationType)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionIco)</td>
+            <td>
+                @Html.DropDownListFor(o => o.PermissionIco, Simon8029.EMPDemo.WebApp.Helpers.EnumHelper.IconClassName.DDLData)
+                <div class="icon-cut" id="imgIco"></div>
+            </td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionIco)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionOrder)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionOrder)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionOrder)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionJsMethodName)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionJsMethodName)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionJsMethodName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.PermissionReMark)</td>
+            <td>@Html.TextBoxFor(o => o.PermissionReMark)</td>
+            <td>@Html.ValidationMessageFor(o => o.PermissionReMark)</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                @Html.DisplayNameFor(o => o.PermissionIsLink) @Html.CheckBoxFor(o => o.PermissionIsLink)
+                @Html.DisplayNameFor(o => o.PermissionIsShow) @Html.CheckBoxFor(o => o.PermissionIsShow)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Modify" />
+            </td>
+        </tr>
+    </table>
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Modify</title>
-</head>
-<body>
-    <div> 
-    </div>
-</body>
-</html>

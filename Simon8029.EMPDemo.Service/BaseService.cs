@@ -37,6 +37,13 @@ namespace Simon8029.EMPDemo.Service
             return IbaseRepository.Get<TKey>(where, orderBy, isAsc);
         }
 
+        public EasyUIModel_PageData<TEntity> GetWithPaginationAndNavigationProperty<TKey>(int pageIndex, int pageSize,
+            Expression<Func<TEntity, bool>> whereExpression, Expression<Func<TEntity, TKey>> orderByExpression, bool isAsc = true, params string[] navigationPropertyName)
+        {
+            return IbaseRepository.GetWithPaginationAndNavigationProperty <
+                   TKey>(pageIndex, pageSize, whereExpression, orderByExpression, isAsc, navigationPropertyName);
+        }
+
         public void Update(TEntity entity, params string[] properties)
         {
             IbaseRepository.Update(entity,properties);
