@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "SetRolePermission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.Admin.Models.SetRolePermissionViewModel
+
+@section headSection{
+    <script type="text/javascript">
+        $(function () {
+            $("input[value=Submit]").click(setRolePer);
+        })
+        function setRolePer() {
+            var ids = "";
+            //1.获取选中的节点数据 数组
+            var checkedNodes = $('#perTree').tree('getChecked');
+            $.each(checkedNodes, function (i, nodeData) {
+                ids += nodeData.id + ",";
+            })
+            //2.获取 半选中的节点数据 数组
+            var indeterminateCheckedNodes = $('#perTree').tree('getChecked', "indeterminate");
+            $.each(indeterminateCheckedNodes, function (i, nodeData) {
+                ids += nodeData.id + ",";
+            })
+            $.post("/admin/role/SetRolePermission", { rid: "@Model.RoleID", newPermissionIds: ids }, function() {
+                
+                $.messager.alert("Info", "role permission(s) updated.","ok",function() {
+                    $.globalHelper.closeCommonWindow();
+                });
+            }, "json");
+        }
+    </script>
+}
+
+@helper LoadChildNode(int parentId)
+{
+    foreach (var permission in Model.AllPermissions.FindAll(o => o.permissionParentID == parentId))
+    {
+        @*
+            注意：如果当前权限 是 当前角色的权限，而且 整个权限集合中都没有它的子权限，则说明它是一个独立的权限，如果 角色权限 有它，则设置为选中状态
+                  如果当前权限 是 当前角色的权限，而且 整个权限集合中有它的子权限，则设置为 非选中状态
+        *@
+        <li data-options="id:@permission.permissionID,@if(Model.RolePermissions.SingleOrDefault(o=>
+        o.permissionID == permission.permissionID) != null && Model.AllPermissions.FirstOrDefault(o => o.permissionParentID == permission.permissionID) == null)
+        {<text>checked:true</text>}">
+            <span>@permission.permissionName</span>
+            <ul>@LoadChildNode(@permission.permissionID)</ul>
+        </li>
+    }
+}+
+<input type="button" value="Submit" />
+<ul id="perTree" class="easyui-tree" data-options="checkbox:true">
+    @LoadChildNode(0)
+</ul>
+<input type="button" value="Submit" />

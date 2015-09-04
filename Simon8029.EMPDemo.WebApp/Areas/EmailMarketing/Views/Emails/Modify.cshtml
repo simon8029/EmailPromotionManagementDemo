@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Modify Email";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Models.EmailViewModel
+@section headSection{
+    <style type="text/css">
+        #imgIco {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#StartDate').datebox();
+            $('#EndDate').datebox();
+            SetCreatedBy();
+        });
+
+
+
+        //获取当前用户名 填入created by中
+        function SetCreatedBy() {
+            $.post("/EmailMarketing/Emails/GetCurrentUserName", function (data) {
+                $("#CreatedBy").val(data);
+            });
+        }
+
+        function goBack() {
+            $.messager.alert("Info", "Back to previous page?", "info", function () {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+
+                $.globalHelper.showCommonWindow("Modify Email", "/emailmarketing/Campaigns/Modify/@Model.CampaignID", 450, 560);
+
+            });
+        }
+
+        function getCurrentCampaignId() {
+
+        }
+
+        function begin() {
+        }
+
+        function complete(xhrObj) {
+            //$.msgBoxObj.hide();
+            $.messager.alert("Info", "Save and next?", "info", function () {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+                $.globalHelper.showCommonWindow("Summary", "/EmailMarketing/Summary/SummaryForSubmit/@Model.CampaignID", 700, 500);
+            });
+        };
+    </script>
+}
+
+Step 2/3 Create/Edit Email
+
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.TextBoxFor(e => e.CampaignID, new { hidden = "hidden" })</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(e => e.SubjectLine)</td>
+            <td>@Html.TextBoxFor(e => e.SubjectLine)</td>
+            <td>@Html.ValidationMessageFor(e => e.SubjectLine)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(e => e.EmailBody)</td>
+            <td>@Html.TextBoxFor(e => e.EmailBody)</td>
+            <td>@Html.ValidationMessageFor(e => e.EmailBody)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(e => e.EnableTracking)</td>
+            <td>@Html.CheckBoxFor(e => e.EnableTracking)</td>
+            <td>@Html.ValidationMessageFor(e => e.EnableTracking)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(e => e.CreatedBy)</td>
+            <td>@Html.TextBoxFor(e => e.CreatedBy)</td>
+            <td>@Html.ValidationMessageFor(e => e.CreatedBy)</td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <input type="button" value="Back" onclick="goBack()" />
+                <input type="submit" value="Save & Next" />
+            </td>
+        </tr>
+    </table>
+}

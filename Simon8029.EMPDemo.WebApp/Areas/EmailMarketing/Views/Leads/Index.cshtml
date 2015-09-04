@@ -1,57 +1,69 @@
 ﻿<!DOCTYPE html>
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/Content/easyUIThemes/icon.css" rel="stylesheet" />
-    <link href="~/Content/easyUIThemes/bootstrap/easyui.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-    <script src="~/Scripts/jquery.easyui.min.js"></script>
-
+@section headSection
+{
     <script type="text/javascript">
         $(function () {
-            $.globalHelper.datagridPara.init("emailmarketing/leads/index", [@Html.GetButtonsForToolbar()], [[
-                { field: 'LeadID', title: 'LeadID', width: 10 },
-                    { field: 'FirstName', title: 'FirstName', width: 10 },
-                    { field: 'LastName', title: 'LastName', width: 10 },
-                    { field: 'EmailAddress', title: 'EmailAddress', width: 10 },
-                    { field: 'IsValid', title: 'IsValid', width: 10 },
-                    { field: 'Unsubscribed', title: 'Unsubscribed', width: 10 }
-            ]])
-        });
-        function loadData(pars) {
-            $('#dg').datagrid({
-                url: '/EmailMarketing/Leads/Index',
-                title: 'Leads Management',
-                fitColumns: true,
-                idField: 'ID',
-                loadMsg: "loading...",
-                pagination: true,
-                singleSelect: false,
-                pagesize: 10,
-                pageNumber: 1,
-                pageList: [10, 20, 30],
-                queryParams: pars,
-                columns: [[
+            $.globalHelper.datagridPara.init("/EmailMarketing/leads/index/1", [@Html.GetButtonsForToolbar()], [
+                [
                     { field: 'LeadID', title: 'LeadID', width: 10 },
                     { field: 'FirstName', title: 'FirstName', width: 10 },
                     { field: 'LastName', title: 'LastName', width: 10 },
                     { field: 'EmailAddress', title: 'EmailAddress', width: 10 },
                     { field: 'IsValid', title: 'IsValid', width: 10 },
                     { field: 'Unsubscribed', title: 'Unsubscribed', width: 10 }
-                ]]
-            });
-        };
+                ]
+            ]);
+
+            $("#tbList").datagrid($.globalHelper.datagridPara.paras);
+        });
+
+
+        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
+        @if (Html.IsButtonExist("add"))
+        {
+            <text>
+        function add() {
+            $.globalHelper.showCommonWindow("Add new Lead", "/emailmarketing/leads/add", 450, 560);
+        }
+        </text>
+        }
+
+        @if (Html.IsButtonExist("remove"))
+    {
+        <text>
+        function remove() {
+        }
+        </text>
+    }
+        @if (Html.IsButtonExist("modify"))
+    {
+        <text>
+        function modify() {
+            ifSelected(function (selectedRowData) {
+                $.globalHelper.showCommonWindow("Modify [" + selectedRowData.permissionName + "]", "/emailmarketing/leads/modify/" + selectedRowData.LeadID, 450, 560);
+            })
+        }
+        </text>
+    }
+
+        //统一判断 是否有选中行，如果有，则调用回到函数（func），并传入 选中行的数据
+        function ifSelected(func) {
+            //获取选中行的数据
+            var selectedRowData = $("#tbList").datagrid("getSelected");
+            if (selectedRowData) {
+                if (func && func instanceof Function) {
+                    func(selectedRowData);//调用回调函数，并传入 选中行的数据
+                }
+            } else {
+                $.messager.alert("Alert", "Please select a row first.");
+            }
+        }
+
     </script>
-</head>
-<body>
-        <div>
-            <table id="dg"></table>
-        </div>
-    </body>
+}
 
+<table id="tbList"></table>
 
-</html>

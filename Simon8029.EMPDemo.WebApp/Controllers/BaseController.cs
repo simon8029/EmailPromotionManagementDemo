@@ -23,5 +23,11 @@ namespace Simon8029.EMPDemo.WebApp.Controllers
                 return operationContext;
             }
         }
+
+        public string GetCurrentUserName()
+        {
+            var currentUserName = OperationContext.CurrentUser.employeeLoginName;
+            return currentUserName;
+        }
     }
 }

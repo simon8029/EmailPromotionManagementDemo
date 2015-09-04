@@ -1,0 +1,111 @@
+﻿@model Simon8029.EMPDemo.Model.EM_Campaigns
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    function approveCampaign() {
+        $.messager.confirm("Info", "Approve Campaign?", function (r) {
+            if (r) {
+                var form = $("#campaignForm");
+                form.submit();
+            }
+        });
+    };
+
+    function complete(data) {
+        $.globalHelper.reloadSeletecTabDataGrid();
+        $.globalHelper.closeCommonWindow();
+    };
+
+    //$("#buttonId").click(function () {
+    //    if (confirm("Are you sure you want to create Id " + $("#CustomerId").val() + " ?")) {
+    //        $("#campaignForm").submit(); // Submitting the form if user clicks OK
+    //    }
+    //});
+
+    //$("#cancel").click(function () {
+    //    $.globalHelper.closeCommonWindow();
+    //});
+
+    function closeCommonWindow() {
+        $.globalHelper.closeCommonWindow();
+    }
+
+</script>
+
+<h2>Summary</h2>
+
+@using (Ajax.BeginForm("SummaryForApprove", "Summary", new AjaxOptions() { OnComplete = "complete" }, new { @id = "campaignForm" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignID)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignID)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.StartDate)</td>
+            <td>@Html.TextBoxFor(o => o.StartDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.EndDate)</td>
+            <td>@Html.TextBoxFor(o => o.EndDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignName)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignDesc)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignDesc)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CreatedBy)</td>
+            <td>@Html.TextBoxFor(o => o.CreatedBy)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CreatedDate)</td>
+            <td>@Html.TextBoxFor(o => o.CreatedDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.UpdatedBy)</td>
+            <td>@Html.TextBoxFor(o => o.UpdatedBy)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.UpdatedDate)</td>
+            <td>@Html.TextBoxFor(o => o.UpdatedDate)</td>
+        </tr>
+
+
+        <hr />
+
+        @if (@Model.EM_EmailInstances.Count > 0)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(o => o.EM_EmailInstances.First().SubjectLine)</td>
+                <td>@Html.TextBoxFor(o => o.EM_EmailInstances.First().SubjectLine)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(o => o.EM_EmailInstances.First().EmailBody)</td>
+                <td>@Html.TextBoxFor(o => o.EM_EmailInstances.First().EmailBody)</td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="3">
+                @if (ViewBag.HasApproveCampaignPermission)
+                {
+                    <input type="button" id="approveButton" value="Approve" onclick="approveCampaign()" />
+                    <input type="button" id="cancel" value="Cancel" onclick="closeCommonWindow()" />
+                }
+                else
+                {
+
+                    <input type="button" id="Ok" value="Ok" onclick="closeCommonWindow()" />
+                }
+            </td>
+        </tr>
+    </table>
+}

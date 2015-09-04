@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section headSection
+{
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("/EmailMarketing/Reports/index/1", [@Html.GetButtonsForToolbar()], [
+                    [
+                        { field: 'CampaignID', title: 'Campaign ID', width: 3 },
+                        { field: 'CampaignName', title: 'CAmpaign Name', width: 10 },
+                        { field: 'CampaignDesc', title: 'Campaign Description', width: 10 },
+                        {
+                            field: 'StartDate', title: 'Start Date', width: 10, formatter: function (colData) {
+                                return $.globalHelper.changeDateFormat(colData);
+                            }
+                        },
+                        {
+                            field: 'EndDate', title: 'End Date', width: 10, formatter: function (colData) {
+                                return $.globalHelper.changeDateFormat(colData);
+                            }
+                        }
+                    ]
+            ]);
+
+            $("#tbList").datagrid($.globalHelper.datagridPara.paras);
+        });
+
+        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
+        @if (Html.IsButtonExist("ShowChart"))
+        {
+        <text>
+        function ShowChart() {
+            ifSelected(function (selectedRowData) {
+                $.globalHelper.showCommonWindow("Campaign Name: " + selectedRowData.CampaignName ,"/emailmarketing/Reports/ShowChart/" + selectedRowData.CampaignID, 700, 560);
+            })
+        }
+        </text>
+        }
+
+        //统一判断 是否有选中行，如果有，则调用回调函数（func），并传入 选中行的数据
+        function ifSelected(func) {
+            //获取选中行的数据
+            var selectedRowData = $("#tbList").datagrid("getSelected");
+            if (selectedRowData) {
+                if (func && func instanceof Function) {
+                    func(selectedRowData);//调用回调函数，并传入 选中行的数据
+                }
+            } else {
+                $.messager.alert("Alert", "Please select a row first.");
+            }
+        }
+
+    </script>
+}
+
+<table id="tbList"></table>
+

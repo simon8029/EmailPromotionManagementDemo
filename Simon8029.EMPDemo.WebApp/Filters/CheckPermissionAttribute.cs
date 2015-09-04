@@ -21,7 +21,7 @@ namespace Simon8029.EMPDemo.WebApp.Filters
         /// <summary>
         /// 区域黑名单
         /// </summary>
-        List<string> blackAreaNames = new List<string>() { "Admin" };
+        List<string> blackAreaNames = new List<string>() { "Admin","EmailMarketing" };
 
         /// <summary>
         /// 授权方法-在此检查权限
@@ -43,6 +43,8 @@ namespace Simon8029.EMPDemo.WebApp.Filters
                         //1.检查是否登录
                         if (IsLogin())
                         {
+                            filterContext.Controller.ViewBag.CurrentUserName =
+                                operationContext.CurrentUser.employeeLoginName;
                             LoadMenuButtons(filterContext);
                             //1.1判断 当前访问的 控制器 或方法上 是否有贴 [SkipPermission]标签，如果有，则不需要检查权限
                             if (!IsDefind<SkipPermissionCheckAttribute>(filterContext))

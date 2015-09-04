@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Modify permission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Models.LeadViewModel
+@section headSection{
+    <style type="text/css">
+        #imgIco {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+         function begin() {
+   
+        }
+        function complete() {
+            $.messager.alert("Info", "Lead Updated.", "info", function () {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+            });
+        }
+    </script>
+}
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.FirstName)</td>
+            <td>@Html.TextBoxFor(l => l.FirstName)</td>
+            <td>@Html.ValidationMessageFor(l => l.FirstName)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.LastName)</td>
+            <td>@Html.TextBoxFor(l => l.LastName)</td>
+            <td>@Html.ValidationMessageFor(l => l.LastName)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.EmailAddress)</td>
+            <td>@Html.TextBoxFor(l => l.EmailAddress)</td>
+            <td>@Html.ValidationMessageFor(l => l.EmailAddress)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.IsValid)</td>
+            <td>@Html.CheckBoxFor(l => l.IsValid)</td>
+            <td>@Html.ValidationMessageFor(l => l.IsValid)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.Unsubscribed)</td>
+            <td>@Html.CheckBoxFor(l => l.Unsubscribed)</td>
+            <td>@Html.ValidationMessageFor(l => l.Unsubscribed)</td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Add" />
+            </td>
+        </tr>
+    </table>
+}
+

@@ -15,9 +15,9 @@
       <PropertyRef Name="CampaignInstanceID" />
     </Key>
     <Property Name="CampaignInstanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EmailInstanceID" Type="int" />
-    <Property Name="LeadID" Type="int" />
-    <Property Name="IsSent" Type="bit" />
+    <Property Name="EmailInstanceID" Type="int" Nullable="false" />
+    <Property Name="LeadID" Type="int" Nullable="false" />
+    <Property Name="IsSent" Type="bit" Nullable="false" />
     <Property Name="EventID" Type="int" />
     <Property Name="EventStatus" Type="char" MaxLength="1" />
     <Property Name="EventDate" Type="datetime" />
@@ -34,17 +34,17 @@
     <Property Name="CampaignID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="StartDate" Type="datetime" />
     <Property Name="EndDate" Type="datetime" />
-    <Property Name="CampaignName" Type="nvarchar" MaxLength="200" />
+    <Property Name="CampaignName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="CampaignDesc" Type="varchar(max)" />
     <Property Name="Owner" Type="nvarchar" MaxLength="100" />
-    <Property Name="ApprovalRequest" Type="bit" />
-    <Property Name="Approved" Type="bit" />
+    <Property Name="ApprovalRequest" Type="bit" Nullable="false" />
+    <Property Name="Approved" Type="bit" Nullable="false" />
     <Property Name="ApprovedBy" Type="nvarchar" MaxLength="50" />
     <Property Name="ApprovedDate" Type="datetime" />
     <Property Name="Guid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Submitted" Type="bit" />
-    <Property Name="CreatedDate" Type="datetime" />
-    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="Submitted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="UpdatedDate" Type="datetime" />
     <Property Name="UpdatedBy" Type="nvarchar" MaxLength="50" />
   </EntityType>
@@ -53,14 +53,14 @@
       <PropertyRef Name="EmailInstanceID" />
     </Key>
     <Property Name="EmailInstanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CampaignID" Type="int" />
+    <Property Name="CampaignID" Type="int" Nullable="false" />
     <Property Name="SubjectLine" Type="varchar" MaxLength="250" />
     <Property Name="EmailBody" Type="nvarchar(max)" />
     <Property Name="Step" Type="tinyint" />
     <Property Name="PreviousStep" Type="tinyint" />
-    <Property Name="EnableTracking" Type="bit" />
-    <Property Name="IsDraft" Type="bit" />
-    <Property Name="Timespan" Type="int" />
+    <Property Name="EnableTracking" Type="bit" Nullable="false" />
+    <Property Name="IsDraft" Type="bit" Nullable="false" />
+    <Property Name="Timespan" Type="int" Nullable="false" />
     <Property Name="AbsoluteDate" Type="datetime" />
     <Property Name="CreatedDate" Type="datetime" />
     <Property Name="CreatedBy" Type="nvarchar" MaxLength="50" />
@@ -105,14 +105,14 @@
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" />
     <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
-    <Property Name="IsValid" Type="bit" />
-    <Property Name="Unsubscribed" Type="bit" />
+    <Property Name="IsValid" Type="bit" Nullable="false" />
+    <Property Name="Unsubscribed" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee">
     <Key>
       <PropertyRef Name="employeeID" />
     </Key>
-    <Property Name="employeeID" Type="int" Nullable="false" />
+    <Property Name="employeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="employeeDepartmentID" Type="int" />
     <Property Name="employeeCnName" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="employeeLoginName" Type="varchar" MaxLength="30" Nullable="false" />
@@ -127,7 +127,7 @@
     <Key>
       <PropertyRef Name="employeeRoleRelationID" />
     </Key>
-    <Property Name="employeeRoleRelationID" Type="int" Nullable="false" />
+    <Property Name="employeeRoleRelationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="employeeID" Type="int" Nullable="false" />
     <Property Name="RoleID" Type="int" Nullable="false" />
   </EntityType>
@@ -156,7 +156,7 @@
     <Key>
       <PropertyRef Name="roleID" />
     </Key>
-    <Property Name="roleID" Type="int" Nullable="false" />
+    <Property Name="roleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="roleName" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="roleIsDeleted" Type="bit" Nullable="false" />
     <Property Name="roleAddTime" Type="datetime" Nullable="false" />
@@ -177,30 +177,6 @@
     <Property Name="userID" Type="int" Nullable="false" />
     <Property Name="permissionID" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="EM_Campaigns_EM_EmailInstances_FK1">
-    <End Role="EM_Campaigns" Type="Self.EM_Campaigns" Multiplicity="0..1" />
-    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EM_Campaigns">
-        <PropertyRef Name="CampaignID" />
-      </Principal>
-      <Dependent Role="EM_EmailInstances">
-        <PropertyRef Name="CampaignID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EM_EmailInstances_EM_CampaignInstances_FK1">
-    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="0..1" />
-    <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EM_EmailInstances">
-        <PropertyRef Name="EmailInstanceID" />
-      </Principal>
-      <Dependent Role="EM_CampaignInstances">
-        <PropertyRef Name="EmailInstanceID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="EM_EmailTemplateTypes_EM_EmailTemplates_FK1">
     <End Role="EM_EmailTemplateTypes" Type="Self.EM_EmailTemplateTypes" Multiplicity="0..1" />
     <End Role="EM_EmailTemplates" Type="Self.EM_EmailTemplates" Multiplicity="*" />
@@ -225,8 +201,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EM_Leads_EM_CampaignInstances_FK1">
-    <End Role="EM_Leads" Type="Self.EM_Leads" Multiplicity="0..1" />
+  <Association Name="FK_EM_CampaignInstances_EM_EmailInstances">
+    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="1" />
+    <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_EmailInstances">
+        <PropertyRef Name="EmailInstanceID" />
+      </Principal>
+      <Dependent Role="EM_CampaignInstances">
+        <PropertyRef Name="EmailInstanceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EM_CampaignInstances_EM_Leads">
+    <End Role="EM_Leads" Type="Self.EM_Leads" Multiplicity="1" />
     <End Role="EM_CampaignInstances" Type="Self.EM_CampaignInstances" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EM_Leads">
@@ -234,6 +222,18 @@
       </Principal>
       <Dependent Role="EM_CampaignInstances">
         <PropertyRef Name="LeadID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EM_EmailInstances_EM_Campaigns">
+    <End Role="EM_Campaigns" Type="Self.EM_Campaigns" Multiplicity="1" />
+    <End Role="EM_EmailInstances" Type="Self.EM_EmailInstances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EM_Campaigns">
+        <PropertyRef Name="CampaignID" />
+      </Principal>
+      <Dependent Role="EM_EmailInstances">
+        <PropertyRef Name="CampaignID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -339,14 +339,6 @@
     <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RolePermissionRelationship" EntityType="Self.RolePermissionRelationship" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VipPermission" EntityType="Self.VipPermission" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="EM_Campaigns_EM_EmailInstances_FK1" Association="Self.EM_Campaigns_EM_EmailInstances_FK1">
-      <End Role="EM_Campaigns" EntitySet="EM_Campaigns" />
-      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
-    </AssociationSet>
-    <AssociationSet Name="EM_EmailInstances_EM_CampaignInstances_FK1" Association="Self.EM_EmailInstances_EM_CampaignInstances_FK1">
-      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
-      <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
-    </AssociationSet>
     <AssociationSet Name="EM_EmailTemplateTypes_EM_EmailTemplates_FK1" Association="Self.EM_EmailTemplateTypes_EM_EmailTemplates_FK1">
       <End Role="EM_EmailTemplateTypes" EntitySet="EM_EmailTemplateTypes" />
       <End Role="EM_EmailTemplates" EntitySet="EM_EmailTemplates" />
@@ -355,9 +347,17 @@
       <End Role="EM_Events" EntitySet="EM_Events" />
       <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
     </AssociationSet>
-    <AssociationSet Name="EM_Leads_EM_CampaignInstances_FK1" Association="Self.EM_Leads_EM_CampaignInstances_FK1">
+    <AssociationSet Name="FK_EM_CampaignInstances_EM_EmailInstances" Association="Self.FK_EM_CampaignInstances_EM_EmailInstances">
+      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
+      <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EM_CampaignInstances_EM_Leads" Association="Self.FK_EM_CampaignInstances_EM_Leads">
       <End Role="EM_Leads" EntitySet="EM_Leads" />
       <End Role="EM_CampaignInstances" EntitySet="EM_CampaignInstances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EM_EmailInstances_EM_Campaigns" Association="Self.FK_EM_EmailInstances_EM_Campaigns">
+      <End Role="EM_Campaigns" EntitySet="EM_Campaigns" />
+      <End Role="EM_EmailInstances" EntitySet="EM_EmailInstances" />
     </AssociationSet>
     <AssociationSet Name="FK_Employee_Department" Association="Self.FK_Employee_Department">
       <End Role="Department" EntitySet="Department" />

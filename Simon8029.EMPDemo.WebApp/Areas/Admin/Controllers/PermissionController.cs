@@ -53,9 +53,20 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
             //MODEL.FormatMODEL.PageData<MODEL.Permission> page
             int pageIndex = Request.Form["page"].AsInt();
             int pageSize = Request.Form["rows"].AsInt();
+
             //1.查询所有的权限列表
-            var permissions = OperationContext.ServiceSession.PermissionService.GetWithPagination(pageIndex, pageSize, o => o.permissionIsDeleted == false && o.permissionParentID == id, o => o.permissionOrder); //.Where(o => o.perIsDel == false).OrderBy(o => o.perOrder).ToList().Select(o=>o.ToPOCO());
+            EasyUIModel_PageData<Permission> permissions = null;
+            if (id==1)//当前选择的是查看所有权限
+            {
+                 permissions = OperationContext.ServiceSession.PermissionService.GetWithPagination(pageIndex, pageSize, p => p.permissionIsDeleted == false, p => p.permissionOrder); //.Where(o => o.perIsDel == false).OrderBy(o => o.perOrder).ToList().Select(o=>o.ToPOCO());
+            }
+            else//查看子权限
+            {
+                permissions = OperationContext.ServiceSession.PermissionService.GetWithPagination(pageIndex, pageSize, p => p.permissionIsDeleted == false && p.permissionParentID == id, p => p.permissionOrder); //.Where(o => o.perIsDel == false).OrderBy(o => o.perOrder).ToList().Select(o=>o.ToPOCO()); 
+            }
+            
             permissions.rows = permissions.rows.Select(o => o.ToPOCO()).ToList();
+
             //2.转成json格式字符串
             var jsSerializer = new JavaScriptSerializer();
             var strJson = jsSerializer.Serialize(permissions);
@@ -157,10 +168,10 @@ namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Controllers
             if (modifyData == null) { throw new Exception("Can not find the permission."); }
 
             //2.准备 父权限 下拉框
-            var parPers = OperationContext.ServiceSession.PermissionService.Get(o => o.permissionParentID <= 1 && o.permissionIsDeleted == false && o.permissionIsShow == true, o => o.permissionOrder).ToList().Select(o => new SelectListItem()
+            var parPers = OperationContext.ServiceSession.PermissionService.Get(p=> p.permissionIsDeleted == false && p.permissionIsShow == true, o => o.permissionOrder).ToList().Select(p => new SelectListItem()
             {
-                Text = o.permissionParentID == 0 ? o.permissionName : "--" + o.permissionName,
-                Value = o.permissionID.ToString()
+                Text = p.permissionParentID == 0 ? p.permissionName : "--" + p.permissionName,
+                Value = p.permissionID.ToString()
             });
             ViewBag.parPers = parPers;
 

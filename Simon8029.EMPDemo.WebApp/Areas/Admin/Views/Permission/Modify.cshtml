@@ -27,16 +27,11 @@
         function begin() {
             //$.msgBoxObj.showWait("请稍后~~~：）");
         }
-        function complete(xhrObj) {
-           // $.msgBoxObj.hide();
-            //$.msgProcess(xhrObj.responseText, function () {
-            //    $.globalHelper.closeCommonWindow();//消息显示完毕后，关闭公共窗体
-            //    //刷新datagrid数据
-            //    $.globalHelper.reloadSeletecTabDataGrid();
-            //});
-
-            $.globalHelper.reloadSeletecTabDataGrid();
-            $.globalHelper.closeCommonWindow();
+        function complete() {
+            $.messager.alert("Info", "Permission Updated.", "info", function () {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+            });
         }
     </script>
 }

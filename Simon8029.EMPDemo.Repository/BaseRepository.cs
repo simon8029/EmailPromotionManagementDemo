@@ -26,7 +26,8 @@ namespace Simon8029.EMPDemo.Repository
             _dbContext.Configuration.ValidateOnSaveEnabled = false;
             //在构造函数中实例化dbSet，通过EF容器对象获取一个DbSet<TEntity>，用来操作与TEntity实体类对应的数据表
             _dbSet = _dbContext.Set<TEntity>();
-        }
+
+           }
 
         public IQueryable<TEntity> Get(Expression<Func<TEntity, bool>> whereExpression)
         {

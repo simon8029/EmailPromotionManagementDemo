@@ -23,12 +23,12 @@ namespace Simon8029.EMPDemo.RepositoryTests
             entity.FirstName = "abc";
             entity.LastName = "def";
             entity.EmailAddress = "abc3@def.com";
-            entity.IsValid = null;
-            entity.Unsubscribed = null;
+            entity.IsValid = true;
+            entity.Unsubscribed = false;
             target.Add(entity);
             DbContextFactory.GetDbContext().SaveChanges();
             EM_Leads addedEntity = target.Get(e => e.FirstName == "abc").FirstOrDefault();
-            Assert.That(addedEntity.FirstName,Is.EqualTo(entity.FirstName));
+            Assert.That(addedEntity.FirstName, Is.EqualTo(entity.FirstName));
 
         }
     }

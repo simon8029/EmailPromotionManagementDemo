@@ -1,0 +1,104 @@
+﻿@model Simon8029.EMPDemo.Model.EM_Campaigns
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+    
+    function begin(){}
+    function complete() {
+        $.messager.alert("Info", "Submit campaign?", "info", function() {
+            @*$.ajax({
+                type: "POST",
+                url: "/EmailMarketing/Summary/SubmitCampaign",
+                data: { id: @Model.CampaignID, approvedBy: $.post("/EmailMarketing/Summary/GetCurrentUserName") },
+                success: success,
+                dataType: dataType
+            });*@
+
+            $.post('/EmailMarketing/Summary/SubmitCampaign', { id: @Model.CampaignID});
+
+            $.globalHelper.reloadSeletecTabDataGrid();
+            $.globalHelper.closeCommonWindow();
+        });
+    };
+
+    function goBack() {
+        $.messager.alert("Info", "Back to previous page?", "info", function () {
+            $.globalHelper.reloadSeletecTabDataGrid();
+            $.globalHelper.closeCommonWindow();
+
+            $.globalHelper.showCommonWindow("Modify Email", "/emailmarketing/Campaigns/Modify/@Model.CampaignID", 450, 560);
+
+        });
+    }
+
+</script>
+
+<h2>Summary</h2>
+
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignID)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignID)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.StartDate)</td>
+            <td>@Html.TextBoxFor(o => o.StartDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.EndDate)</td>
+            <td>@Html.TextBoxFor(o => o.EndDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignName)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignName)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CampaignDesc)</td>
+            <td>@Html.TextBoxFor(o => o.CampaignDesc)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CreatedBy)</td>
+            <td>@Html.TextBoxFor(o => o.CreatedBy)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.CreatedDate)</td>
+            <td>@Html.TextBoxFor(o => o.CreatedDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.UpdatedBy)</td>
+            <td>@Html.TextBoxFor(o => o.UpdatedBy)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(o => o.UpdatedDate)</td>
+            <td>@Html.TextBoxFor(o => o.UpdatedDate)</td>
+        </tr>
+
+        @if (@Model.EM_EmailInstances.Count > 0)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(o => o.EM_EmailInstances.First().SubjectLine)</td>
+                <td>@Html.TextBoxFor(o => o.EM_EmailInstances.First().SubjectLine)</td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(o => o.EM_EmailInstances.First().EmailBody)</td>
+                <td>@Html.TextBoxFor(o => o.EM_EmailInstances.First().EmailBody)</td>
+            </tr>
+        }
+
+
+        <tr>
+            <td colspan="3">
+                <input type="button" value="Back" onclick="goBack"/>
+                <input type="submit" value="Submit" />
+            </td>
+        </tr>
+    </table>
+}
+
+

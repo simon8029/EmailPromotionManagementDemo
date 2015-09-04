@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section headSection
+{
+    <script type="text/javascript">
+        $(function () {
+            $.globalHelper.datagridPara.init("/EmailMarketing/Campaigns/index/1", [@Html.GetButtonsForToolbar()], [
+                [
+                    { field: 'CampaignID', title: 'Campaign ID', width: 10 },
+                    { field: 'CampaignName', title: 'Campaign Name', width: 10 },
+                    { field: 'CampaignDesc', title: 'CAmpaign Description', width: 25 },
+                    {
+                        field: 'StartDate', title: 'Start Date', width: 10, formatter: function (colData) {
+                            return $.globalHelper.changeDateFormat(colData);
+                        }
+                    },
+                    {
+                        field: 'EndDate', title: 'End Date', width: 10, formatter: function (colData) {
+                            return $.globalHelper.changeDateFormat(colData);
+                        }
+                    },
+                    { field: 'Owner', title: 'Owner', width: 10 },
+                    { field: 'CreatedBy', title: 'Created By', width: 10 },
+                    { field: 'CreatedDate', title: 'Created Date', width: 10 ,formatter:function(colData) {
+                        return $.globalHelper.changeDateFormat(colData);
+                    }},
+                    { field: 'UpdatedBy', title: 'Updated By', width: 10 },
+                    { field: 'UpdatedDate', title: 'Updated Date', width: 10,formatter:function(colData) {
+                        return $.globalHelper.changeDateFormat(colData);
+                    } },
+                    { field: 'Submitted', title: 'Submitted', width: 10 },
+                    { field: 'Approved', title: 'Approved', width: 10 },
+                    { field: 'ApprovedBy', title: 'Approved By', width: 10 },
+                    {
+                        field: 'ApprovedDate', title: 'Approved Date', width: 10, formatter: function (colData) {
+                            return $.globalHelper.changeDateFormat(colData);
+                        }
+                    },
+                    { field: 'Guid', title: 'Guid', width: 10 }
+                ]
+            ]);
+
+            $("#tbList").datagrid($.globalHelper.datagridPara.paras);
+        });
+
+
+        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
+        @if (Html.IsButtonExist("add"))
+        {
+            <text>
+        function add() {
+            $.globalHelper.showCommonWindow("Add new Campaign", "/emailmarketing/campaigns/add", 450, 560);
+        }
+        </text>
+        }
+
+        @if (Html.IsButtonExist("remove"))
+    {
+        <text>
+        function remove() {
+        }
+        </text>
+    }
+        @if (Html.IsButtonExist("modify"))
+    {
+        <text>
+        function modify() {
+            ifSelected(function (selectedRowData) {
+                $.globalHelper.showCommonWindow("Modify [" + selectedRowData.CampaignName + "]", "/emailmarketing/campaigns/modify/" + selectedRowData.CampaignID, 450, 560);
+            })
+        }
+    </text>
+    }
+    
+     @if (Html.IsButtonExist("SummaryForApprove"))//显示campaign详细信息
+     {
+         <text>
+        function SummaryForApprove() {
+             ifSelected(function (selectedRowData) {
+                 $.globalHelper.showCommonWindow("Show [" + selectedRowData.CampaignName + "] details", "/emailmarketing/summary/SummaryForApprove/" + selectedRowData.CampaignID, 450, 560);
+             })
+         }
+         </text>
+     }
+
+        //统一判断 是否有选中行，如果有，则调用回调函数（func），并传入 选中行的数据
+        function ifSelected(func) {
+            //获取选中行的数据
+            var selectedRowData = $("#tbList").datagrid("getSelected");
+            if (selectedRowData) {
+                if (func && func instanceof Function) {
+                    func(selectedRowData);//调用回调函数，并传入 选中行的数据
+                }
+            } else {
+                $.messager.alert("Alert", "Please select a row first.");
+            }
+        }
+
+    </script>
+}
+
+<table id="tbList"></table>
+

@@ -12,7 +12,8 @@
                     .window("center")
                     .window("open")
                     .children("iframe")
-                    .attr("src", url);
+                    .attr("src", url)
+                ;
 
                 window.top.$.messager.progress({ text: "Loading..." });
             },
@@ -57,10 +58,14 @@
             },
             //将序列化成json格式后日期(毫秒数)转成日期格式
             changeDateFormat: function (cellval) {
-                var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
-                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-                return date.getFullYear() + "-" + month + "-" + currentDate;
+                if (cellval != null) {
+                    var date = new Date(parseInt(cellval.replace("/Date(", "").replace(")/", ""), 10));
+                    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                    return date.getFullYear() + "-" + month + "-" + currentDate;
+                } else {
+                    return "";
+                }
             }
         }
     });

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Add new Campaign";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@model Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Models.CampaignViewModel
+@section headSection{
+    <style type="text/css">
+        #imgIco {
+            width: 16px;
+            height: 16px;
+            margin-top: 4px;
+            display: inline-block;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#StartDate').datebox();
+            $('#EndDate').datebox();
+            SetCreatedBy();
+        });
+
+        //获取当前用户名 填入created by中
+        function SetCreatedBy() {
+            $.post("/EmailMarketing/Campaigns/GetCurrentUserName", function (data) {
+                $("#CreatedBy").val(data);
+            });
+        }
+
+
+        function begin() {
+        }
+
+        function complete() {
+            $.messager.alert("Info", "Save and next?", "info", function () {
+                $.globalHelper.reloadSeletecTabDataGrid();
+                $.globalHelper.closeCommonWindow();
+                $.globalHelper.showCommonWindow("Add New Email", "/emailmarketing/Emails/Add/"+@Model.CampaignID, 450, 560);
+            });
+        };
+    </script>
+}
+
+Step 1/3 Create/Edit Campaign
+@using (Ajax.BeginForm(new AjaxOptions() { OnBegin = "begin", OnComplete = "complete" }))
+{
+    <table class="tbList">
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.CampaignName)</td>
+            <td>@Html.TextBoxFor(l => l.CampaignName)</td>
+            <td>@Html.ValidationMessageFor(l => l.CampaignName)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.CampaignDesc)</td>
+            <td>@Html.EditorFor(l => l.CampaignDesc)</td>
+            <td>@Html.ValidationMessageFor(l => l.CampaignDesc)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.StartDate)</td>
+            <td>@Html.TextBoxFor(l => l.StartDate)</td>
+            <td>@Html.ValidationMessageFor(l => l.StartDate)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.EndDate)</td>
+            <td>@Html.TextBoxFor(l => l.EndDate)</td>
+            <td>@Html.ValidationMessageFor(l => l.EndDate)</td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(l => l.CreatedBy)</td>
+            <td>@Html.TextBoxFor(l => l.CreatedBy, new { @readonly = "readonly" })</td>
+            <td>@Html.ValidationMessageFor(l => l.CreatedBy)</td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                @*<input type="button" value="Back"/>*@
+                <input type="submit" value="Save & Next" />
+            </td>
+        </tr>
+    </table>
+}
