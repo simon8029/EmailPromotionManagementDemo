@@ -2,7 +2,7 @@
 // SOLUTION: 
 // PROJECT: 
 // FILE NAME: 
-// CREATED ON 8/19/2015
+// CREATED ON 10/22/2015
 //   
 // Copyright (C) 2015 Simon8029
 // All rights reserved.
@@ -14,7 +14,8 @@
 using Simon8029.EMPDemo.Model;
 using Simon8029.EMPDemo.IService;
 using Simon8029.EMPDemo.IRepository;
-namespace Simon8029.EMPDemo.Service{
+namespace Simon8029.EMPDemo.Service
+{
     public partial class EmployeeService : BaseService<Employee>,IEmployeeService
     {
     	public override void SetIBaseRepository()

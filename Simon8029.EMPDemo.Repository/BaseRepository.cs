@@ -16,13 +16,12 @@ namespace Simon8029.EMPDemo.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        //准备一个EF容器对象，并在构造函数中实例化dbSet，通过EF容器对象获取一个DbSet<TEntity>，用来操作与TEntity实体类对应的数据表
+        
         private readonly DbContext _dbContext = DbContextFactory.GetDbContext();
         private readonly DbSet<TEntity> _dbSet;
 
         public BaseRepository()
         {
-            //关闭dbContext容器的为空检查
             _dbContext.Configuration.ValidateOnSaveEnabled = false;
             //在构造函数中实例化dbSet，通过EF容器对象获取一个DbSet<TEntity>，用来操作与TEntity实体类对应的数据表
             _dbSet = _dbContext.Set<TEntity>();

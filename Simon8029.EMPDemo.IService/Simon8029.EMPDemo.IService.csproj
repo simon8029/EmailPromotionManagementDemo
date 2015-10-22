@@ -88,6 +88,7 @@
     <Compile Include="IRoleService.cs">
       <DependentUpon>IServices.tt</DependentUpon>
     </Compile>
+    <Compile Include="IServiceExtensions\IEmployeeServiceExtension.cs" />
     <Compile Include="IServiceSessionExtension.cs" />
     <Compile Include="IServices.cs">
       <AutoGen>True</AutoGen>

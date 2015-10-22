@@ -2,7 +2,7 @@
 // SOLUTION: 
 // PROJECT: 
 // FILE NAME: 
-// CREATED ON Monday, August 17, 2015
+// CREATED ON Thursday, October 22, 2015
 //   
 // Copyright (C) 2015 Simon8029
 // All rights reserved.
@@ -20,6 +20,5 @@ namespace Simon8029.EMPDemo.IService
     
     public partial interface IEmployeeService : IBaseService<Employee>
     {
-        List<Permission> GetUserPermissions(int userId);
     }
 }
