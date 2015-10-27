@@ -10,47 +10,39 @@ using Simon8029.EMPDemo.WebApp.Helpers;
 
 namespace Simon8029.EMPDemo.WebApp.Filters
 {
-    /// <summary>
-    /// 自定义授权过滤器
-    /// </summary>
+   
     public class CheckPermissionAttribute : System.Web.Mvc.AuthorizeAttribute
     {
-        //操作上下文对象
         private OperationContext operationContext = new OperationContext();
 
-        /// <summary>
-        /// 区域黑名单
-        /// </summary>
+       
         List<string> blackAreaNames = new List<string>() { "Admin","EmailMarketing" };
 
-        /// <summary>
-        /// 授权方法-在此检查权限
-        /// </summary>
-        /// <param name="filterContext"></param>
+        
         public override void OnAuthorization(System.Web.Mvc.AuthorizationContext filterContext)
         {
-            //判断当前请求的 url中是否 有区域名
+            //detect if current url has area name
             if (filterContext.RouteData.DataTokens.ContainsKey("area"))
             {
-                //0.2获取当前请求的区域名
+                //0.2 get current area name
                 string strCurAreaName = filterContext.RouteData.DataTokens["area"].ToString();
-                //如果 当前请求的 区域 在检查黑名单中，则 检查登陆和权限
+                // if current area is in the blacklist, then detect permission
                 if (blackAreaNames.Contains(strCurAreaName))
                 {
-                    //0.1 判断 当前访问的 控制器 或 方法上 是否有 贴【SkipLogin】标签，如果有，则不需要检查登录和权限
+                    // if  [skiplogin] then skip login check
                     if (!IsDefind<SkipLoginCheckAttribute>(filterContext))
                     {
-                        //1.检查是否登录
+                        
                         if (IsLogin())
                         {
                             filterContext.Controller.ViewBag.CurrentUserName =
                                 operationContext.CurrentUser.employeeLoginName;
                             LoadMenuButtons(filterContext);
-                            //1.1判断 当前访问的 控制器 或方法上 是否有贴 [SkipPermission]标签，如果有，则不需要检查权限
+                            // if [skipPermission] then skip permission check
                             if (!IsDefind<SkipPermissionCheckAttribute>(filterContext))
                             {
                                 
-                                //2.检查登录用户是否有 访问当前url的权限
+                                //2. check if user has permisison to access current url
                                 if (!operationContext.HasPermission(strCurAreaName,
                                      filterContext.ActionDescriptor.ControllerDescriptor.ControllerName,
                                      filterContext.ActionDescriptor.ActionName,
@@ -58,19 +50,16 @@ namespace Simon8029.EMPDemo.WebApp.Filters
                                 {
                                     filterContext.Result = SendMessage("sorry, you don't have the permission. please login with other account.", "/Admin/User/Login");
                                 }
-                                //如果有权限
                                 else
                                 {
                                     //LoadMenuBtns(filterContext);
                                 }
                             }
-                            //跳过权限检查后
                             else
                             {
                                 //LoadMenuBtns(filterContext);
                             }
                         }
-                        //没有登录
                         else
                         {
                             filterContext.Result = SendMessage("Please login first.", "/Admin/User/Login");
@@ -81,30 +70,23 @@ namespace Simon8029.EMPDemo.WebApp.Filters
 
         }
 
-        #region 1.0 判断当前访问用户 是否登录 -bool IsLogin()
-        /// <summary>
-        /// 判断当前访问用户 是否登录
-        ///     如果没有Session，但是有Cookie，则自动登录
-        /// </summary>
-        /// <returns></returns>
+        #region 1.0 check if current user is login 
         private bool IsLogin()
         {
-            //1.先判断是否有Session
+            //1. check if has session
             if (operationContext.CurrentUser == null)
             {
-                //1.1如果没有，则检查登录Cookie是否存在
-                //1.1.1如果没有 登录Cookie，则代表用户没有登录，直接返回false
+                //1.1 if no session, check cookie
+                //1.1.1 if no cookie, means user is not login, return false. 
                 if (operationContext.CurrentUserIdInCookie <= -1)
                 {
                     return false;
                 }
-                //1.1.2如果有cookie，则根据cookie里的登录用户id，重新查询 登录用户实体，并存入 Session
+                //1.1.2 if has cookie, login user by id in cookie, then save to session
                 else
                 {
                     var usrId = operationContext.CurrentUserIdInCookie;
-                    //根据cookie里的用户id重新查询用户，并存入Session 【自动登录】
                     operationContext.CurrentUser = operationContext.ServiceSession.EmployeeService.Get(o => o.employeeID == usrId).SingleOrDefault().ToPOCO();
-                    //f.1查询登录用户的权限集合 并存入 Session
                     operationContext.CurrentUserPermissions = operationContext.ServiceSession.EmployeeService.GetUserPermissions(usrId);
                 }
             }

@@ -30,11 +30,9 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
             int pageSize = Request.Form["rows"].AsInt();
             int totalCount = 10;
 
-            //已发送邮件的campaignInstances（有重复值）
             var CampaignInstances_isSent =
                 OperationContext.ServiceSession.EM_CampaignInstancesService.Get(c => c.IsSent).ToList();
 
-            //已发送的邮件Id列表（去掉重复值）
             var emailInstanceId_isSent = new List<int>();
             foreach (var campaignInstance in CampaignInstances_isSent)
             {
@@ -44,19 +42,16 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
                 }
             }
 
-            //已发送邮件的emailInstance集合
             var emailInstances_isSent =
                 OperationContext.ServiceSession.EM_EmailInstancesService.Get(
                     e => emailInstanceId_isSent.Contains(e.EmailInstanceID)).ToList();
 
-            //已发送邮件的campaignIds
             List<int> campaignIds_isSent = new List<int>();
             foreach (var emailInstance in emailInstances_isSent)
             {
                 campaignIds_isSent.Add(emailInstance.CampaignID);
             }
 
-            //已发送邮件的campaign集合
             var campaignList = OperationContext.ServiceSession.EM_CampaignsService.GetWithPagination(pageIndex, pageSize,
                 c => campaignIds_isSent.Contains(c.CampaignID), c => c.CampaignID, true);
             campaignList.rows = campaignList.rows.Select(r => r.ToPOCO()).ToList();
@@ -66,31 +61,26 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
 
         public ActionResult ShowChart(int id)
         {
-            //1. 获取已发送邮件的campaignInstance总数
-            //1.1 获取已发邮件的邮件id
+
             var emailId =
                 OperationContext.ServiceSession.EM_EmailInstancesService.Get(e => e.CampaignID == id)
                     .FirstOrDefault()
                     .EmailInstanceID;
-            //1.2 获取已发邮件的campaign总数
             var totalCampaigns =
                 OperationContext.ServiceSession.EM_CampaignInstancesService.Get(c => c.EmailInstanceID == emailId)
                     .Count();
 
-            //2. 获取已读邮件的campaignInstance总数
             var openedCampaign =
                 OperationContext.ServiceSession.EM_CampaignInstancesService.Get(
                     c => c.EmailInstanceID == emailId && c.EventStatus == "Y").Count();
-            //3. 计算百分比
             var openedRatePercentage = Math.Round(openedCampaign * 1.0 / totalCampaigns * 100, 2);
             var unOpenedRatePercentage = Math.Round(((totalCampaigns - openedCampaign) * 1.0 / totalCampaigns) * 100, 2);
 
-            //设置饼图
             Highcharts chart = new Highcharts("PieChart")
                 .InitChart(new Chart { PlotShadow = false })
-                .SetTitle(new Title { Text = "Open Rate untill: "+DateTime.Now })
+                .SetTitle(new Title { Text = "Open Rate untill: " + DateTime.Now })
                 .SetTooltip(new Tooltip { Formatter = "function() { return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %'; }" })
-                .SetCredits(new Credits(){Enabled = false})
+                .SetCredits(new Credits() { Enabled = false })
                 .SetPlotOptions(new PlotOptions
                 {
 
@@ -120,7 +110,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
                 });
 
             return View(chart);
-            
+
         }
     }
 }

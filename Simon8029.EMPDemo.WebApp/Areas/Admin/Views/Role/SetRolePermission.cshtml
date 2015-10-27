@@ -11,12 +11,10 @@
         })
         function setRolePer() {
             var ids = "";
-            //1.获取选中的节点数据 数组
             var checkedNodes = $('#perTree').tree('getChecked');
             $.each(checkedNodes, function (i, nodeData) {
                 ids += nodeData.id + ",";
             })
-            //2.获取 半选中的节点数据 数组
             var indeterminateCheckedNodes = $('#perTree').tree('getChecked', "indeterminate");
             $.each(indeterminateCheckedNodes, function (i, nodeData) {
                 ids += nodeData.id + ",";
@@ -35,10 +33,7 @@
 {
     foreach (var permission in Model.AllPermissions.FindAll(o => o.permissionParentID == parentId))
     {
-        @*
-            注意：如果当前权限 是 当前角色的权限，而且 整个权限集合中都没有它的子权限，则说明它是一个独立的权限，如果 角色权限 有它，则设置为选中状态
-                  如果当前权限 是 当前角色的权限，而且 整个权限集合中有它的子权限，则设置为 非选中状态
-        *@
+        
         <li data-options="id:@permission.permissionID,@if(Model.RolePermissions.SingleOrDefault(o=>
         o.permissionID == permission.permissionID) != null && Model.AllPermissions.FirstOrDefault(o => o.permissionParentID == permission.permissionID) == null)
         {<text>checked:true</text>}">

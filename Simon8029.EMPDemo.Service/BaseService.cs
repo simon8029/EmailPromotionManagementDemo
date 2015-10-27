@@ -13,11 +13,11 @@ namespace Simon8029.EMPDemo.Service
 {
     public abstract class BaseService<TEntity> : IBaseService<TEntity> where TEntity : class
     {
-        public IBaseRepository<TEntity> IbaseRepository = null; //数据父接口对象
+        public IBaseRepository<TEntity> IbaseRepository = null; 
 
         public BaseService()
         {
-            SetIBaseRepository();//专门要求子类为业务父类里的数据父接口赋值，不同子类赋值不同
+            SetIBaseRepository();
         }
 
         public abstract void SetIBaseRepository();

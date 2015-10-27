@@ -22,7 +22,6 @@
             $("#tbList").datagrid($.globalHelper.datagridPara.paras);
         });
 
-        @*根据当前登录用户 Session里 权限集合 的按钮，决定是否显示对应的按钮方法*@
         @if (Html.IsButtonExist("add"))
         {
         <text>
@@ -35,7 +34,7 @@
         @if (Html.IsButtonExist("setRolePermission"))
         {
             <text>
-        function setRolePermission()//设置子权限
+        function setRolePermission()//
         {
             ifSelected(function (perData) {
                 $.globalHelper.showCommonWindow("Set \"" + perData.roleName + "\" Permissions", "/admin/role/SetRolePermission/" + perData.roleID, 350, 580);
@@ -63,18 +62,15 @@
             </text>
         }
 
-    //统一判断 是否有选中行，如果有，则调用回调函数（func），并传入 选中行的数据
     function ifSelected(func)
     {
-        //获取选中行的数据
         var selectedRowData = $("#tbList").datagrid("getSelected");
         if (selectedRowData) {
             if (func && func instanceof Function)
             {
-                func(selectedRowData);//调用回调函数，并传入 选中行的数据
+                func(selectedRowData);
             }
         } else {
-            // $.msgBoxObj.showInfo("请选中要操作的行 ~~~");
             $.messager.alert("Warning", "Please select one row.", "tip");
         }
     }

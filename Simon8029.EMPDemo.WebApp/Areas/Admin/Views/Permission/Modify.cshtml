@@ -19,13 +19,11 @@
         })
 
         function changeIcon() {
-            //把选中的 图标样式 设置给 演示的 div
             document.getElementById("imgIco").className = this.value;
             //$("#imgIco").class = this.value;
         }
 
         function begin() {
-            //$.msgBoxObj.showWait("请稍后~~~：）");
         }
         function complete() {
             $.messager.alert("Info", "Permission Updated.", "info", function () {

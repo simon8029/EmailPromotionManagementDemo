@@ -10,9 +10,9 @@
     <script src="~/Scripts/jquery.easyui.min.js"></script>
     <script type="text/javascript">
         $(function () {
-            //1.初始化 选项卡容器
+            // init tab container
             $("#tabBox").tabs();
-            //2.初始化公共窗体
+            // init common window
             $("#commonWindow").window({
                 iconCls: 'icon-tip',
                 modal: true,
@@ -22,16 +22,16 @@
                 height: 550,
                 title: 'Common window',
                 closed: true
-            }).children("iframe").load(function () { //找到公共个窗体里的 iframe ，为其onload事件注册方法，关闭 进度条
+            }).children("iframe").load(function () { // find iframe within common window, regist close progress method for onload method
                 $.messager.progress("close");
             });
 
-            //3.初始树形菜单
+            //3. init menu tree
             $("#menuTree").tree({
                 url: "/admin/manage/getmenutree",
                 onLoadSuccess: function (node, jsonData) {
-                    //如果返回的消息 对象 包含 Status属性，说明是返回的 json消息，那么就调用 msgProcess方法 统一处理
-                    //                   不包含Status属性，说明 返回的是 节点json数据
+                    //if response message object has status property, then it is json message. call msgProcess method.
+                    //otherwise it is a json node.
                     if (jsonData.Status) {
                         $.messageProcess(jsonData);
                     }
@@ -40,37 +40,27 @@
             });
         });
 
-        //1.节点点击方法 参数：被点击的节点对应的Json数据对象
         function nodeClick(nodeData) {
-            //判断当前节点点击时是否要打开页面
             if (nodeData.attributes.isLink) {
-                //1.1如果有和被点击节点同名的选项卡，就自动切换过去
                 if (!$("#tabBox").tabs("exists", nodeData.text)) {
-                    //调用选项卡组件的 add 方法，并传入参数对象{title}
                     $("#tabBox").tabs("add", {
-                        title: nodeData.text,//选项卡标题
-                        closable: true,//选项卡显示 关闭按钮
-                        content: createContent(nodeData.attributes.url)//设置选项卡内容
+                        title: nodeData.text,
+                        closable: true,
+                        content: createContent(nodeData.attributes.url)
                     });
                 } else {
-                    //判断 和被点击节点 同名的 选项卡 是否为选中状态
-                    //获取选中选项卡的标题
+                   
                     var $curTab = $('#tabBox').tabs('getSelected');
                     var curTabTitle = $curTab.panel("options").title;
-                    //如果是，则提示是否要刷新选项卡
                     if (nodeData.text == curTabTitle) {
                         $.messager.confirm('Confirm', "Refresh \"" + curTabTitle + "\" ?", function (isOk) {
                             if (isOk) {
-                                //从当前选中的 选项卡中 找到iframe
                                 var $ifrObj = $("iframe", $curTab);
-                                //重新设置iframe的src路径（刷新）
                                 $ifrObj.attr("src", nodeData.attributes.url);
                             }
                         });
                     }
-                        //如果不是，则设置为选中
                     else {
-                        //设置 同名选项卡 为选中状态
                         $("#tabBox").tabs("select", nodeData.text);
                     }
                 }

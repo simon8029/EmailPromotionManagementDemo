@@ -21,7 +21,6 @@
 
 
 
-        //获取当前用户名 填入created by中
         function SetCreatedBy() {
             $.post("/EmailMarketing/Emails/GetCurrentUserName", function (data) {
                 $("#CreatedBy").val(data);

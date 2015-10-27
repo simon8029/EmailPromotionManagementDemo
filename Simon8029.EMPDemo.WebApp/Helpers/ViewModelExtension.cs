@@ -11,7 +11,7 @@ namespace Simon8029.EMPDemo.WebApp.Helpers
     public static class ViewModelExtension
     {
         /// <summary>
-        /// 将 权限实体 对象 转成 权限视图模型 对象
+        ///  convert POCO object to viewModel object
         /// </summary>
         /// <param name="permissionpermissionPOCO"></param>
         /// <returns></returns>

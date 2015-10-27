@@ -33,11 +33,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
             return Content(javascriptSerializer.Serialize(campaignList));
         }
 
-        #region 2.0 加载 新增 视图 + Add()
-        /// <summary>
-        /// 2.0 加载 新增 视图
-        /// </summary>
-        /// <returns></returns>
+   
         [HttpGet]
         public ActionResult Add()
         {
@@ -53,14 +49,8 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
             }
             return View(campaignViewModel);
         }
-        #endregion
 
-        #region 2.1 保存 新增 数据 +Add(models.l viewModel)
-        /// <summary>
-        /// 2.1 保存 新增 数据
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
+     
         [HttpPost]
         public ActionResult Add(CampaignViewModel viewModel)
         {
@@ -76,46 +66,30 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
                 return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationFailed, "Please enable javascript in browser.", "", null);
             }
         }
-        #endregion
 
 
 
-        #region 3.0 加载 修改 视图 +Modify(int id)
-        /// <summary>
-        /// 3.0 加载 修改 视图
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+      
         [HttpGet]
         public ActionResult Modify(int id)
         {
-            //1.查询要修改的 权限 实体对象
             var modifyData = OperationContext.ServiceSession.EM_CampaignsService.Get(l => l.CampaignID == id).SingleOrDefault();
             if (modifyData == null) { throw new Exception("Can not find the campaign."); }
 
-            //3.将 实体对象 转成 视图模型对象 传给 视图
             return View(modifyData.ToViewModel());
         }
-        #endregion
 
         [HttpPost]
-        /// <summary>
-        /// 3.1 保存 修改 数据
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="form"></param>
-        /// <returns></returns>
+     
         public ActionResult Modify(int id, CampaignViewModel viewmodel)
         {
             if (ModelState.IsValid)
             {
-                //1.从url参数中 获取 要修改的 对象的 id
                 viewmodel.CampaignID = id;
-                //2.修改权限
                 OperationContext.ServiceSession.EM_CampaignsService.Update(viewmodel.ToPOCO(), "CampaignDesc", "CampaignName", "UpdatedBy", "UpdatedDate", "StartDate", "EndDate");
                 OperationContext.ServiceSession.SaveChange();
 
-                //3.从emailInstance表中获取当前campaign的email信息，若已有email则在sendajaxmessage中将Message设置为hasEmail,并将该emailId赋给viewbag
+   
                 string hasEmail = string.Empty;
                 string emailInstanceId=string.Empty;
                 if (OperationContext.ServiceSession.EM_EmailInstancesService.Get(e => e.CampaignID == id).FirstOrDefault() != null)

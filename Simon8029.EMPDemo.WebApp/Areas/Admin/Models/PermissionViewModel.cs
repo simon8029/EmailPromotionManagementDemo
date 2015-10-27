@@ -8,9 +8,7 @@ using System.Web;
 namespace Simon8029.EMPDemo.WebApp.Areas.Admin.Models
 {
 
-    /// <summary>
-    /// 权限 视图模型
-    /// </summary>
+
     public class PermissionViewModel
     {
         public int PermissionId { get; set; }

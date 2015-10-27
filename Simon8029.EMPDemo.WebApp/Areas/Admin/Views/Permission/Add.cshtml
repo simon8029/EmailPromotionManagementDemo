@@ -14,7 +14,7 @@
     </style>
     <script type="text/javascript">
         $(function() {
-            //1.当父权限下拉框的value值改变时，自动生成 要添加的子权限的 序号
+            //1.genereate sub-permission's order number when dropdown list's value changed.
             $("#PermissionParentId").change(loadOrderNumber);
             $("#PermissionParentId").change();
 
@@ -22,9 +22,7 @@
             $("#PermissionIco").change();
         })
 
-        //1.自动生成 序号
         function loadOrderNumber() {
-            //1.1获取 选中的父权限id
             var parentId = this.value;
             $.post("/admin/Permission/loadordernumber", { pId: parentId }, function(data) {
                 $("#PermissionOrder").val(data);
@@ -32,27 +30,21 @@
         }
 
         function changeIcon() {
-            //把选中的 图标样式 设置给 演示的 div
             document.getElementById("imgIco").className = this.value;
-            //$("#imgIco").class = this.value;
         }
 
         function begin() {
-            //$.msgBoxObj.showWait("请稍后~~~：）");
             
         }
 
         function complete(xhrObj) {
-            //$.msgBoxObj.hide();
             $.messager.alert("Info", "Permission Added.","info",function() {
                 $.globalHelper.reloadSeletecTabDataGrid();
                 $.globalHelper.closeCommonWindow();
             });
             
 
-            //$.messageProcess(xhrObj.responseText, function () {
-            //    $.globalHelper.reloadSeletecTabDataGrid();
-            //    $.globalHelper.closeCommonWindow();//消息显示完毕后，关闭公共窗体
+            
         };
     </script>
     }

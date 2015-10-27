@@ -9,12 +9,7 @@ namespace Simon8029.EMPDemo.WebApp
 {
     public static class HtmlHelperExtension
     {
-         #region 1.0 获取 当前登录用户 拥有的受访页面的 按钮
-        /// <summary>
-        /// 1.0 获取 当前登录用户 拥有的受访页面的 按钮
-        /// </summary>
-        /// <param name="htmlHelper"></param>
-        /// <returns></returns>
+         #region 1.0  Get current user's buttons
         public static System.Web.Mvc.MvcHtmlString GetButtonsForToolbar(this System.Web.Mvc.HtmlHelper htmlHelper)
         {
 
@@ -32,13 +27,7 @@ namespace Simon8029.EMPDemo.WebApp
         } 
         #endregion
 
-        #region 2.0 判断登录用户 是否拥有 绑定 指定JS方法名 的 按钮 +bool IsBtnExist(this System.Web.Mvc.HtmlHelper htmlHelper, string strJsMethodName)
-        /// <summary>
-        /// 2.0 判断登录用户 是否拥有 绑定 指定JS方法名 的 按钮
-        /// </summary>
-        /// <param name="htmlHelper"></param>
-        /// <param name="strJsMethodName">要查找的按钮绑定的JS方法名</param>
-        /// <returns></returns>
+        #region 2.0 detect user's button 
         public static bool IsButtonExist(this System.Web.Mvc.HtmlHelper htmlHelper, string strJsMethodName)
         {
             var btns = htmlHelper.ViewBag.toolbarButtons;

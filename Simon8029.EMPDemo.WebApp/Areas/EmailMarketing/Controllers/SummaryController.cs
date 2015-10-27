@@ -52,14 +52,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
         [HttpPost]
         public ActionResult SummaryForApprove(int id, FormCollection form)
         {
-            ////1.从url参数中 获取 要修改的 对象的 id
-            //viewModel.CampaignID = id;
-
-            ////2. Update Approved field
-            //OperationContext.ServiceSession.EM_CampaignsService.Update(viewModel.ToPOCO(), "Approved");
-            //OperationContext.ServiceSession.SaveChange();
-
-            //return OperationContext.SendAjaxMessage(AjaxMessageStatus.OperationSuccess, "", "", null);
+           
 
             var campaign = OperationContext.ServiceSession.EM_CampaignsService.Get(c => c.CampaignID == id).FirstOrDefault();
             if (campaign != null)
@@ -69,7 +62,7 @@ namespace Simon8029.EMPDemo.WebApp.Areas.EmailMarketing.Controllers
                 campaign.ApprovedDate=DateTime.Now;
                 OperationContext.ServiceSession.SaveChange();
 
-                //调用存储过程，向campaignInstance中填充相关数据
+                //invoke stored procedure, populate data to campaignInstance.
                 Entities entity = new Entities();
                 var emailInstanceId =
                     OperationContext.ServiceSession.EM_EmailInstancesService.Get(e => e.CampaignID == id)

@@ -71,28 +71,21 @@
 
         function messageProcess(ajaxMessageText) {
             var msgObj = null;
-            //一、判断格式
-            //1.判断 参数 是否为 字符串
             if (typeof (ajaxMessageText) == "string") {
-                //msgObj = JSON.parse(jsonText);//只支持新版本浏览器
+                //msgObj = JSON.parse(jsonText);//
                 try {
-                    //1.1将字符串 尝试转成 js 对象
-                    //处理 数组字面量表示法的 json字符串：[{},{}]
                     msgObj = eval(ajaxMessageText);
                 } catch (e) {
                     try {
-                        //处理 对象字面量表示法的 json字符串:{}
                         msgObj = eval("(" + ajaxMessageText + ")");
                     } catch (e1) {
                         alert("format error: must be json format.");
                     }
                 }
             }
-            //2.判断 参数 是否为 规定格式 的 对象
             else {
-                //2.1如果 对象 包含 Status，则 认为 其符合 规定的格式
                 if (jsonText.Status) {
-                    msgObj = jsonText; //直接将 符合格式的 对象 设置给 msgObj
+                    msgObj = jsonText; 
                 }
             }
             $.messager.alert("info", msgObj.Message);
@@ -100,48 +93,7 @@
                 window.location = msgObj.BackUrl;
             else window.top.location = msgObj.BackUrl;
 
-            //二、统一按规则处理消息
-            //根据 服务器返回的 消息状态 进行不同的操作
-            //switch (msgObj.Status) //根据状态做不同处理
-            //{
-            //case 1: //LoginSuccess
-            //    //if (doesMsgBoxExsit()) {
-            //    //	$.msgBoxObj.showOK(msgObj.Msg, function () { invokeFunc(funcOk); });
-            //    //}
-            //    $.messager.alert("login", "login success.");
-            //    if (typeof (msgObj.BackUrl) == "string" && msgObj.BackUrl) {
-            //        if (window.top == window)
-            //            window.location = msgObj.BackUrl;
-            //        else window.top.location = msgObj.BackUrl;
-            //    }
-            //    break;
-            //case 2: //LoginFailed
-            //    $.messager.alert("Error", msgObj.Message);
-            //    window.Location = "/admin/user/login";
-            //case 3: //NotLogin
-            //    if (doesMsgBoxExsit()) {
-            //        $.msgBoxObj.showInfo(msgObj.Msg, function() { invokeFunc(); });
-            //    }
-            //    break;
-            //case 4: //NoPermission
-            //    if (doesMsgBoxExsit()) {
-            //        $.msgBoxObj.showInfo(msgObj.Msg, function() { invokeFunc(); });
-            //    }
-            //    break;
-            //case 5: //OperationSuccess
-            //    if (doesMsgBoxExsit()) {
-            //        $.msgBoxObj.showFailed(msgObj.Msg, function() {
-            //            alert(msgObj.Msg);
-            //        });
-            //    }
-            //    break;
-            //case 6: //OperationFailed
-
-            //    break;
-            //case 7: //OtherError
-
-            //    break;
-            //}
+            
         }
     </script>
 </head>
